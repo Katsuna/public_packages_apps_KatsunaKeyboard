@@ -16,8 +16,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.ImePreferences" android:label="@string/settings_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+
         <service
-            android:name=".ui.SimpleIME"
+            android:name=".ui.SoftKeyboard"
             android:label="@string/simple_ime"
             android:permission="android.permission.BIND_INPUT_METHOD">
             <meta-data
