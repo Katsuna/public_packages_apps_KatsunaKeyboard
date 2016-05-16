@@ -5,8 +5,8 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 
 import gr.crystalogic.keyboard.R;
 
@@ -16,12 +16,12 @@ public class LatinKeyboard extends Keyboard {
     private Key mSpaceKey;
     /**
      * Stores the current state of the mode change key. Its width will be dynamically updated to
-     * match the region of {@link #mModeChangeKey} when {@link #mModeChangeKey} becomes invisible.
+     * match the region of mModeChangeKey when mModeChangeKey becomes invisible.
      */
     private Key mModeChangeKey;
     /**
      * Stores the current state of the language switch key (a.k.a. globe key). This should be
-     * visible while {@link InputMethodManager#shouldOfferSwitchingToNextInputMethod(IBinder)}
+     * visible while InputMethodManager#shouldOfferSwitchingToNextInputMethod(IBinder)
      * returns true. When this key becomes invisible, its width will be shrunk to zero.
      */
     private Key mLanguageSwitchKey;
@@ -110,7 +110,7 @@ public class LatinKeyboard extends Keyboard {
                 mEnterKey.label = res.getText(R.string.label_next_key);
                 break;
             case EditorInfo.IME_ACTION_SEARCH:
-                mEnterKey.icon = res.getDrawable(R.drawable.sym_keyboard_search);
+                mEnterKey.icon = ResourcesCompat.getDrawable(res, R.drawable.sym_keyboard_search, null);
                 mEnterKey.label = null;
                 break;
             case EditorInfo.IME_ACTION_SEND:
@@ -119,7 +119,7 @@ public class LatinKeyboard extends Keyboard {
                 mEnterKey.label = res.getText(R.string.label_send_key);
                 break;
             default:
-                mEnterKey.icon = res.getDrawable(R.drawable.sym_keyboard_return);
+                mEnterKey.icon = ResourcesCompat.getDrawable(res, R.drawable.sym_keyboard_return, null);
                 mEnterKey.label = null;
                 break;
         }

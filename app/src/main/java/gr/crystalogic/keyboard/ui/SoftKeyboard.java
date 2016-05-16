@@ -42,7 +42,6 @@ public class SoftKeyboard extends InputMethodService
     private int mLastDisplayWidth;
     private boolean mCapsLock;
     private long mLastShiftTime;
-    private long mMetaState;
 
     private LatinKeyboard mSymbolsKeyboard;
     private LatinKeyboard mSymbolsShiftedKeyboard;
@@ -125,11 +124,6 @@ public class SoftKeyboard extends InputMethodService
         // Reset our state.  We want to do this even if restarting, because
         // the underlying state of the text editor could have changed in any way.
         mComposing.setLength(0);
-
-        if (!restarting) {
-            // Clear shift states.
-            mMetaState = 0;
-        }
 
         // We are now going to initialize our state based on the type of
         // text being edited.
@@ -341,10 +335,8 @@ public class SoftKeyboard extends InputMethodService
             handleShift();
         } else if (primaryCode == Keyboard.KEYCODE_CANCEL) {
             handleClose();
-            return;
         } else if (primaryCode == LatinKeyboardView.KEYCODE_LANGUAGE_SWITCH) {
             handleLanguageSwitch();
-            return;
         } else if (primaryCode == LatinKeyboardView.KEYCODE_OPTIONS) {
             // Show a menu or somethin'
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE

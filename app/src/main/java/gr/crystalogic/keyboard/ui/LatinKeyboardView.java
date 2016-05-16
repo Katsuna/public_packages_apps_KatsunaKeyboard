@@ -3,6 +3,7 @@ package gr.crystalogic.keyboard.ui;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.inputmethod.InputMethodSubtype;
 
@@ -32,7 +33,7 @@ public class LatinKeyboardView extends KeyboardView {
 
     void setSubtypeOnSpaceKey(final InputMethodSubtype subtype) {
         final LatinKeyboard keyboard = (LatinKeyboard)getKeyboard();
-        keyboard.setSpaceIcon(getResources().getDrawable(subtype.getIconResId()));
+        keyboard.setSpaceIcon(ResourcesCompat.getDrawable(getResources(), subtype.getIconResId(), null));
         invalidateAllKeys();
     }
 }
