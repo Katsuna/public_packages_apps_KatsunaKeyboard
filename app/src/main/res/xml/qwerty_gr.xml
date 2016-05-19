@@ -167,7 +167,7 @@
             android:keyLabel=". ,"
             android:keyWidth="15%p" />
         <Key
-            android:codes="10"
+            android:codes="-4"
             android:keyEdgeFlags="right"
             android:keyIcon="@drawable/sym_keyboard_return"
             android:keyWidth="20%p" />

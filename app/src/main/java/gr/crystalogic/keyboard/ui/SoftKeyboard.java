@@ -330,7 +330,11 @@ public class SoftKeyboard extends InputMethodService
             handleLanguageSwitch();
         } else if (primaryCode == LatinKeyboardView.KEYCODE_OPTIONS) {
             // Show a menu or somethin'
-        } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
+        } else if (primaryCode == Keyboard.KEYCODE_DONE) {
+            InputConnection ic = getCurrentInputConnection();
+            ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+        }
+        else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
             Keyboard current = mInputView.getKeyboard();
             if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) {
