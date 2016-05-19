@@ -47,8 +47,9 @@ public class SoftKeyboard extends InputMethodService
     private LatinKeyboard mSymbolsShiftedKeyboard;
     private LatinKeyboard mQwertyKeyboard;
     private LatinKeyboard mQwertyGrKeyboard;
+    private Keyboard mPhoneKeyboard;
 
-    private LatinKeyboard mCurKeyboard;
+    private Keyboard mCurKeyboard;
 
     /**
      * Main initialization of the input method component.  Be sure to call
@@ -81,6 +82,7 @@ public class SoftKeyboard extends InputMethodService
         mQwertyGrKeyboard = new LatinKeyboard(this, R.xml.qwerty_gr);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
+        mPhoneKeyboard = new Keyboard(this, R.xml.phone);
     }
 
     /**
@@ -102,10 +104,12 @@ public class SoftKeyboard extends InputMethodService
         return mInputView;
     }
 
-    private void setLatinKeyboard(LatinKeyboard nextKeyboard) {
+    private void setLatinKeyboard(Keyboard nextKeyboard) {
         final boolean shouldSupportLanguageSwitchKey =
                 mInputMethodManager.shouldOfferSwitchingToNextInputMethod(getToken());
-        nextKeyboard.setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
+        if(nextKeyboard instanceof LatinKeyboard) {
+            ((LatinKeyboard) nextKeyboard).setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
+        }
         mInputView.setKeyboard(nextKeyboard);
     }
 
@@ -140,7 +144,7 @@ public class SoftKeyboard extends InputMethodService
             case InputType.TYPE_CLASS_PHONE:
                 // Phones will also default to the symbols keyboard, though
                 // often you will want to have a dedicated phone keyboard.
-                mCurKeyboard = mSymbolsKeyboard;
+                mCurKeyboard = mPhoneKeyboard;
                 break;
 
             case InputType.TYPE_CLASS_TEXT:
@@ -167,25 +171,8 @@ public class SoftKeyboard extends InputMethodService
 
         // Update the label on the enter key, depending on what the application
         // says it will do.
-        mCurKeyboard.setImeOptions(getResources(), attribute.imeOptions);
-    }
-
-    /**
-     * This is called when the user is done editing a field.  We can use
-     * this to reset our state.
-     */
-    @Override
-    public void onFinishInput() {
-        Log.e(TAG, "onFinishInput");
-
-        super.onFinishInput();
-
-        // Clear current composing text and candidates.
-        mComposing.setLength(0);
-
-        mCurKeyboard = mQwertyKeyboard;
-        if (mInputView != null) {
-            mInputView.closing();
+        if (mCurKeyboard instanceof LatinKeyboard) {
+            ((LatinKeyboard) mCurKeyboard).setImeOptions(getResources(), attribute.imeOptions);
         }
     }
 
@@ -198,7 +185,9 @@ public class SoftKeyboard extends InputMethodService
         setLatinKeyboard(mCurKeyboard);
         mInputView.closing();
         final InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
-        mInputView.setSubtypeOnSpaceKey(subtype);
+        if (mCurKeyboard instanceof LatinKeyboard) {
+            mInputView.setSubtypeOnSpaceKey(subtype);
+        }
     }
 
     @Override
@@ -209,7 +198,9 @@ public class SoftKeyboard extends InputMethodService
 
         setLatinKeyboard(mCurKeyboard);
 
-        mInputView.setSubtypeOnSpaceKey(subtype);
+        if (mCurKeyboard instanceof LatinKeyboard) {
+            mInputView.setSubtypeOnSpaceKey(subtype);
+        }
     }
 
     private LatinKeyboard getKeyboard(InputMethodSubtype subtype) {
@@ -327,7 +318,7 @@ public class SoftKeyboard extends InputMethodService
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
 
-        Log.e(TAG, "onKey");
+        Log.e(TAG, "onKey:" + primaryCode);
 
         if (primaryCode == Keyboard.KEYCODE_DELETE) {
             handleBackspace();
@@ -433,8 +424,8 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private void handleLanguageSwitch() {
-        //mInputMethodManager.showInputMethodPicker();
-        mInputMethodManager.switchToNextInputMethod(getToken(), true);
+        mInputMethodManager.showInputMethodPicker();
+        //mInputMethodManager.switchToNextInputMethod(getToken(), true);
     }
 
     private void checkToggleCapsLock() {
