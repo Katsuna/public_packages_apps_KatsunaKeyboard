@@ -22,8 +22,6 @@ public class SoftKeyboard extends InputMethodService
 
     private static final String TAG = "SoftKeyboard";
 
-    static final boolean DEBUG = false;
-
     /**
      * This boolean indicates the optional example code for performing
      * processing of hard keys in addition to regular text generation
@@ -107,7 +105,7 @@ public class SoftKeyboard extends InputMethodService
     private void setLatinKeyboard(Keyboard nextKeyboard) {
         final boolean shouldSupportLanguageSwitchKey =
                 mInputMethodManager.shouldOfferSwitchingToNextInputMethod(getToken());
-        if(nextKeyboard instanceof LatinKeyboard) {
+        if (nextKeyboard instanceof LatinKeyboard) {
             ((LatinKeyboard) nextKeyboard).setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
         }
         mInputView.setKeyboard(nextKeyboard);
@@ -331,10 +329,8 @@ public class SoftKeyboard extends InputMethodService
         } else if (primaryCode == LatinKeyboardView.KEYCODE_OPTIONS) {
             // Show a menu or somethin'
         } else if (primaryCode == Keyboard.KEYCODE_DONE) {
-            InputConnection ic = getCurrentInputConnection();
-            ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
-        }
-        else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
+            performEditorAction(EditorInfo.IME_ACTION_NEXT);
+        } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
             Keyboard current = mInputView.getKeyboard();
             if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) {
@@ -347,6 +343,11 @@ public class SoftKeyboard extends InputMethodService
         } else {
             handleCharacter(primaryCode, keyCodes);
         }
+    }
+
+    private void performEditorAction(final int actionId) {
+        InputConnection ic = getCurrentInputConnection();
+        ic.performEditorAction(actionId);
     }
 
     @Override

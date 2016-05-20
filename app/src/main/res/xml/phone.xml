@@ -71,7 +71,7 @@
             android:codes="32"
             android:keyIcon="@drawable/sym_keyboard_space" />
         <Key
-            android:codes="10"
+            android:codes="-4"
             android:keyEdgeFlags="right"
             android:keyIcon="@drawable/sym_keyboard_return"
             android:keyWidth="16%p" />
