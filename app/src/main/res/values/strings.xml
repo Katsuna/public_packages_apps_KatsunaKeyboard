@@ -15,4 +15,9 @@
     <string name="select_language">Select input languages</string>
     <string name="label_subtype_en">English</string>
     <string name="label_subtype_el">Greek</string>
+
+    <string name="textField">Text field</string>
+    <string name="phoneField">Phone field</string>
+    <string name="passwordField">Password field</string>
+
 </resources>

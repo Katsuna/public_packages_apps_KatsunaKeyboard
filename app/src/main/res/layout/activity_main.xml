@@ -14,7 +14,7 @@
             android:id="@+id/textField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Text field"
+            android:hint="@string/textField"
             android:inputType="text"
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
@@ -28,7 +28,7 @@
             android:id="@+id/phoneField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone field"
+            android:hint="@string/phoneField"
             android:inputType="phone"
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
@@ -42,7 +42,7 @@
             android:id="@+id/textField2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Text field2"
+            android:hint="@string/passwordField"
             android:inputType="textPassword"
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
