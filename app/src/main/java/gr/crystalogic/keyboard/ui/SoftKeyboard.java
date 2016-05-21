@@ -20,8 +20,6 @@ import gr.crystalogic.keyboard.R;
 public class SoftKeyboard extends InputMethodService
         implements KeyboardView.OnKeyboardActionListener {
 
-    private static final String TAG = "SoftKeyboard";
-
     /**
      * This boolean indicates the optional example code for performing
      * processing of hard keys in addition to regular text generation
@@ -31,7 +29,7 @@ public class SoftKeyboard extends InputMethodService
      * that are primarily intended to be used for on-screen text entry.
      */
     static final boolean PROCESS_HARD_KEYS = true;
-
+    private static final String TAG = "SoftKeyboard";
     private InputMethodManager mInputMethodManager;
 
     private LatinKeyboardView mInputView;
@@ -45,9 +43,10 @@ public class SoftKeyboard extends InputMethodService
     private LatinKeyboard mSymbolsShiftedKeyboard;
     private LatinKeyboard mQwertyKeyboard;
     private LatinKeyboard mQwertyGrKeyboard;
-    private Keyboard mPhoneKeyboard;
+    private LatinKeyboard mPhoneKeyboard;
 
-    private Keyboard mCurKeyboard;
+    private LatinKeyboard mCurKeyboard;
+    private EditorInfo mCurrentEditorInfo;
 
     /**
      * Main initialization of the input method component.  Be sure to call
@@ -80,7 +79,7 @@ public class SoftKeyboard extends InputMethodService
         mQwertyGrKeyboard = new LatinKeyboard(this, R.xml.qwerty_gr);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
-        mPhoneKeyboard = new Keyboard(this, R.xml.phone);
+        mPhoneKeyboard = new LatinKeyboard(this, R.xml.phone);
     }
 
     /**
@@ -102,12 +101,10 @@ public class SoftKeyboard extends InputMethodService
         return mInputView;
     }
 
-    private void setLatinKeyboard(Keyboard nextKeyboard) {
+    private void setLatinKeyboard(LatinKeyboard nextKeyboard) {
         final boolean shouldSupportLanguageSwitchKey =
                 mInputMethodManager.shouldOfferSwitchingToNextInputMethod(getToken());
-        if (nextKeyboard instanceof LatinKeyboard) {
-            ((LatinKeyboard) nextKeyboard).setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
-        }
+        nextKeyboard.setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
         mInputView.setKeyboard(nextKeyboard);
     }
 
@@ -169,23 +166,22 @@ public class SoftKeyboard extends InputMethodService
 
         // Update the label on the enter key, depending on what the application
         // says it will do.
-        if (mCurKeyboard instanceof LatinKeyboard) {
-            ((LatinKeyboard) mCurKeyboard).setImeOptions(getResources(), attribute.imeOptions);
-        }
+        mCurKeyboard.setImeOptions(getResources(), attribute.imeOptions);
     }
 
     @Override
-    public void onStartInputView(EditorInfo attribute, boolean restarting) {
+    public void onStartInputView(EditorInfo info, boolean restarting) {
         Log.e(TAG, "onStartInputView");
 
-        super.onStartInputView(attribute, restarting);
+        super.onStartInputView(info, restarting);
+
+        mCurrentEditorInfo = info;
+
         // Apply the selected keyboard to the input view.
         setLatinKeyboard(mCurKeyboard);
         mInputView.closing();
         final InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
-        if (mCurKeyboard instanceof LatinKeyboard) {
-            mInputView.setSubtypeOnSpaceKey(subtype);
-        }
+        mInputView.setSubtypeOnSpaceKey(subtype);
     }
 
     @Override
@@ -195,10 +191,7 @@ public class SoftKeyboard extends InputMethodService
         mCurKeyboard = getKeyboard(subtype);
 
         setLatinKeyboard(mCurKeyboard);
-
-        if (mCurKeyboard instanceof LatinKeyboard) {
-            mInputView.setSubtypeOnSpaceKey(subtype);
-        }
+        mInputView.setSubtypeOnSpaceKey(subtype);
     }
 
     private LatinKeyboard getKeyboard(InputMethodSubtype subtype) {
@@ -326,10 +319,8 @@ public class SoftKeyboard extends InputMethodService
             handleClose();
         } else if (primaryCode == LatinKeyboardView.KEYCODE_LANGUAGE_SWITCH) {
             handleLanguageSwitch();
-        } else if (primaryCode == LatinKeyboardView.KEYCODE_OPTIONS) {
-            // Show a menu or somethin'
         } else if (primaryCode == Keyboard.KEYCODE_DONE) {
-            performEditorAction(EditorInfo.IME_ACTION_NEXT);
+            performEditorAction(mCurrentEditorInfo);
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
             Keyboard current = mInputView.getKeyboard();
@@ -345,9 +336,28 @@ public class SoftKeyboard extends InputMethodService
         }
     }
 
-    private void performEditorAction(final int actionId) {
+    private void performEditorAction(EditorInfo sEditorInfo) {
         InputConnection ic = getCurrentInputConnection();
-        ic.performEditorAction(actionId);
+        switch (sEditorInfo.imeOptions & (EditorInfo.IME_MASK_ACTION | EditorInfo.IME_FLAG_NO_ENTER_ACTION)) {
+            case EditorInfo.IME_ACTION_GO:
+                ic.performEditorAction(EditorInfo.IME_ACTION_GO);
+                break;
+            case EditorInfo.IME_ACTION_NEXT:
+                ic.performEditorAction(EditorInfo.IME_ACTION_NEXT);
+                break;
+            case EditorInfo.IME_ACTION_SEARCH:
+                ic.performEditorAction(EditorInfo.IME_ACTION_SEARCH);
+                break;
+            case EditorInfo.IME_ACTION_SEND:
+                ic.performEditorAction(EditorInfo.IME_ACTION_SEND);
+                break;
+            case EditorInfo.IME_ACTION_DONE:
+                ic.performEditorAction(EditorInfo.IME_ACTION_DONE);
+                break;
+            default:
+                ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+                break;
+        }
     }
 
     @Override

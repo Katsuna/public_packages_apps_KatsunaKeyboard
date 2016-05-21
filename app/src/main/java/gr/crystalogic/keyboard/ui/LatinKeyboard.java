@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.inputmethod.EditorInfo;
 
 import gr.crystalogic.keyboard.R;
@@ -46,7 +45,7 @@ public class LatinKeyboard extends Keyboard {
     protected Key createKeyFromXml(Resources res, Row parent, int x, int y,
                                    XmlResourceParser parser) {
         Key key = new LatinKey(res, parent, x, y, parser);
-        if (key.codes[0] == 10) {
+        if (key.codes[0] == -4) {
             mEnterKey = key;
         } else if (key.codes[0] == ' ') {
             mSpaceKey = key;
@@ -69,18 +68,28 @@ public class LatinKeyboard extends Keyboard {
         if (visible) {
             // The language switch key should be visible. Restore the size of the mode change key
             // and language switch key using the saved layout.
-            mModeChangeKey.width = mSavedModeChangeKey.width;
-            mModeChangeKey.x = mSavedModeChangeKey.x;
-            mLanguageSwitchKey.width = mSavedLanguageSwitchKey.width;
-            mLanguageSwitchKey.icon = mSavedLanguageSwitchKey.icon;
-            mLanguageSwitchKey.iconPreview = mSavedLanguageSwitchKey.iconPreview;
+            if (mModeChangeKey != null) {
+                mModeChangeKey.width = mSavedModeChangeKey.width;
+                mModeChangeKey.x = mSavedModeChangeKey.x;
+            }
+
+            if (mLanguageSwitchKey != null) {
+                mLanguageSwitchKey.width = mSavedLanguageSwitchKey.width;
+                mLanguageSwitchKey.icon = mSavedLanguageSwitchKey.icon;
+                mLanguageSwitchKey.iconPreview = mSavedLanguageSwitchKey.iconPreview;
+            }
         } else {
             // The language switch key should be hidden. Change the width of the mode change key
             // to fill the space of the language key so that the user will not see any strange gap.
-            mModeChangeKey.width = mSavedModeChangeKey.width + mSavedLanguageSwitchKey.width;
-            mLanguageSwitchKey.width = 0;
-            mLanguageSwitchKey.icon = null;
-            mLanguageSwitchKey.iconPreview = null;
+            if (mModeChangeKey != null) {
+                mModeChangeKey.width = mSavedModeChangeKey.width + mSavedLanguageSwitchKey.width;
+            }
+
+            if (mLanguageSwitchKey != null) {
+                mLanguageSwitchKey.width = 0;
+                mLanguageSwitchKey.icon = null;
+                mLanguageSwitchKey.iconPreview = null;
+            }
         }
     }
 
@@ -95,27 +104,19 @@ public class LatinKeyboard extends Keyboard {
 
         switch (options & (EditorInfo.IME_MASK_ACTION | EditorInfo.IME_FLAG_NO_ENTER_ACTION)) {
             case EditorInfo.IME_ACTION_GO:
-                mEnterKey.iconPreview = null;
-                mEnterKey.icon = null;
                 mEnterKey.label = res.getText(R.string.label_go_key);
                 break;
             case EditorInfo.IME_ACTION_NEXT:
-                mEnterKey.iconPreview = null;
-                mEnterKey.icon = null;
                 mEnterKey.label = res.getText(R.string.label_next_key);
                 break;
             case EditorInfo.IME_ACTION_SEARCH:
-                mEnterKey.icon = ResourcesCompat.getDrawable(res, R.drawable.sym_keyboard_search, null);
-                mEnterKey.label = null;
+                mEnterKey.label = res.getText(R.string.label_search_key);
                 break;
             case EditorInfo.IME_ACTION_SEND:
-                mEnterKey.iconPreview = null;
-                mEnterKey.icon = null;
                 mEnterKey.label = res.getText(R.string.label_send_key);
                 break;
             default:
-                mEnterKey.icon = ResourcesCompat.getDrawable(res, R.drawable.sym_keyboard_return, null);
-                mEnterKey.label = null;
+                mEnterKey.label = res.getText(R.string.label_done_key);
                 break;
         }
     }

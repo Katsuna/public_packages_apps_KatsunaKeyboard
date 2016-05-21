@@ -1,7 +1,6 @@
 package gr.crystalogic.keyboard.ui;
 
 import android.content.Context;
-import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
@@ -9,7 +8,6 @@ import android.view.inputmethod.InputMethodSubtype;
 
 public class LatinKeyboardView extends KeyboardView {
 
-    static final int KEYCODE_OPTIONS = -100;
     // TODO: Move this into android.inputmethodservice.Keyboard
     static final int KEYCODE_LANGUAGE_SWITCH = -101;
 
@@ -21,18 +19,8 @@ public class LatinKeyboardView extends KeyboardView {
         super(context, attrs, defStyle);
     }
 
-    @Override
-    protected boolean onLongPress(Keyboard.Key key) {
-        if (key.codes[0] == Keyboard.KEYCODE_CANCEL) {
-            getOnKeyboardActionListener().onKey(KEYCODE_OPTIONS, null);
-            return true;
-        } else {
-            return super.onLongPress(key);
-        }
-    }
-
     void setSubtypeOnSpaceKey(final InputMethodSubtype subtype) {
-        final LatinKeyboard keyboard = (LatinKeyboard)getKeyboard();
+        final LatinKeyboard keyboard = (LatinKeyboard) getKeyboard();
         keyboard.setSpaceIcon(ResourcesCompat.getDrawable(getResources(), subtype.getIconResId(), null));
         invalidateAllKeys();
     }

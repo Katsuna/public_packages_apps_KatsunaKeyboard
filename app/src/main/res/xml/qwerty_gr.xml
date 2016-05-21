@@ -169,7 +169,6 @@
         <Key
             android:codes="-4"
             android:keyEdgeFlags="right"
-            android:keyIcon="@drawable/sym_keyboard_return"
             android:keyWidth="20%p" />
     </Row>
 </Keyboard>
