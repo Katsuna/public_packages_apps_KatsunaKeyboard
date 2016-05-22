@@ -3,7 +3,6 @@ package gr.crystalogic.keyboard.ui;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
-import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.view.inputmethod.EditorInfo;
 
@@ -12,7 +11,6 @@ import gr.crystalogic.keyboard.R;
 public class LatinKeyboard extends Keyboard {
 
     private Key mEnterKey;
-    private Key mSpaceKey;
     /**
      * Stores the current state of the mode change key. Its width will be dynamically updated to
      * match the region of mModeChangeKey when mModeChangeKey becomes invisible.
@@ -47,8 +45,6 @@ public class LatinKeyboard extends Keyboard {
         Key key = new LatinKey(res, parent, x, y, parser);
         if (key.codes[0] == -4) {
             mEnterKey = key;
-        } else if (key.codes[0] == ' ') {
-            mSpaceKey = key;
         } else if (key.codes[0] == Keyboard.KEYCODE_MODE_CHANGE) {
             mModeChangeKey = key;
             mSavedModeChangeKey = new LatinKey(res, parent, x, y, parser);
@@ -118,12 +114,6 @@ public class LatinKeyboard extends Keyboard {
             default:
                 mEnterKey.label = res.getText(R.string.label_done_key);
                 break;
-        }
-    }
-
-    void setSpaceIcon(final Drawable icon) {
-        if (mSpaceKey != null) {
-            mSpaceKey.icon = icon;
         }
     }
 

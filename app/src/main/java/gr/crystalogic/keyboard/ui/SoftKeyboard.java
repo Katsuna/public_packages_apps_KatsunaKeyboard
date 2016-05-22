@@ -168,7 +168,7 @@ public class SoftKeyboard extends InputMethodService
 
         // Update the label on the enter key, depending on what the application
         // says it will do.
-        mCurKeyboard.setImeOptions(getResources(), attribute.imeOptions);
+        //mCurKeyboard.setImeOptions(getResources(), attribute.imeOptions);
     }
 
     @Override
@@ -182,8 +182,6 @@ public class SoftKeyboard extends InputMethodService
         // Apply the selected keyboard to the input view.
         setLatinKeyboard(mCurKeyboard);
         mInputView.closing();
-        final InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
-        mInputView.setSubtypeOnSpaceKey(subtype);
     }
 
     @Override
@@ -191,9 +189,7 @@ public class SoftKeyboard extends InputMethodService
         Log.e(TAG, "onCurrentInputMethodSubtypeChanged");
 
         mCurKeyboard = getKeyboard(subtype);
-
         setLatinKeyboard(mCurKeyboard);
-        mInputView.setSubtypeOnSpaceKey(subtype);
     }
 
     private LatinKeyboard getKeyboard(InputMethodSubtype subtype) {
