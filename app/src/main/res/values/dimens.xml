@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="key_height">50dip</dimen>
+    <dimen name="key_height">60dp</dimen>
+    <dimen name="horizontalGap">0dp</dimen>
+    <dimen name="verticalGap">0dp</dimen>
 
 </resources>

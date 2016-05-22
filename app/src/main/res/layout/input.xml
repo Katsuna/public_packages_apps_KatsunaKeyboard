@@ -3,4 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
+    style="@style/BackgroundStyle"
+    android:keyTextSize="28sp"
+    android:keyTextColor="@color/black87"
+    android:keyBackground="@drawable/samplekeybackground"
     android:keyPreviewLayout="@layout/preview" />
