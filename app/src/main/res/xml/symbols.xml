@@ -122,14 +122,18 @@
             android:keyLabel="ABC"
             android:keyWidth="10%p" />
         <Key
+            android:codes="44"
+            android:keyLabel=","
+            android:keyWidth="10%p" />
+        <Key
             android:codes="32"
             android:isRepeatable="true"
             android:keyIcon="@drawable/ic_space_bar_black_36dp"
-            android:keyWidth="45%p" />
+            android:keyWidth="40%p" />
         <Key
-            android:codes="44"
-            android:keyLabel=","
-            android:keyWidth="15%p" />
+            android:codes="46"
+            android:keyLabel="."
+            android:keyWidth="10%p" />
         <Key
             android:codes="-4"
             android:keyEdgeFlags="right"
