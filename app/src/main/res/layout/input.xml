@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <gr.crystalogic.keyboard.ui.LatinKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/BackgroundStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    style="@style/BackgroundStyle"
-    android:keyTextSize="28sp"
-    android:keyTextColor="@color/black87"
     android:keyBackground="@drawable/samplekeybackground"
-    android:keyPreviewLayout="@layout/preview" />
+    android:keyPreviewLayout="@layout/preview"
+    android:keyTextColor="@color/black87"
+    android:keyTextSize="28sp"
+    android:shadowRadius="0" />
