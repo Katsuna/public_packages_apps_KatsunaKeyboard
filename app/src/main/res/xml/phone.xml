@@ -61,9 +61,11 @@
 
     <Row android:rowEdgeFlags="bottom">
         <Key
-            android:codes="-10"
+            android:codes="42"
             android:keyEdgeFlags="left"
-            android:keyLabel="*#" />
+            android:keyLabel="*"
+            android:popupCharacters="*#(/)N"
+            android:popupKeyboard="@xml/kbd_popup_template" />
         <Key
             android:codes="48"
             android:keyLabel="0" />
