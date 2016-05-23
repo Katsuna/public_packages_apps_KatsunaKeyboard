@@ -48,7 +48,7 @@ public class LatinKeyboard extends Keyboard {
         } else if (key.codes[0] == Keyboard.KEYCODE_MODE_CHANGE) {
             mModeChangeKey = key;
             mSavedModeChangeKey = new LatinKey(res, parent, x, y, parser);
-        } else if (key.codes[0] == LatinKeyboardView.KEYCODE_LANGUAGE_SWITCH) {
+        } else if (key.codes[0] == Constants.KEYCODE_LANGUAGE_SWITCH) {
             mLanguageSwitchKey = key;
             mSavedLanguageSwitchKey = new LatinKey(res, parent, x, y, parser);
         }

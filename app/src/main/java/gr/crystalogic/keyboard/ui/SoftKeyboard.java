@@ -315,7 +315,7 @@ public class SoftKeyboard extends InputMethodService
             handleShift();
         } else if (primaryCode == Keyboard.KEYCODE_CANCEL) {
             handleClose();
-        } else if (primaryCode == LatinKeyboardView.KEYCODE_LANGUAGE_SWITCH) {
+        } else if (primaryCode == Constants.KEYCODE_LANGUAGE_SWITCH) {
             handleLanguageSwitch();
         } else if (primaryCode == Keyboard.KEYCODE_DONE) {
             performEditorAction(mCurrentEditorInfo);

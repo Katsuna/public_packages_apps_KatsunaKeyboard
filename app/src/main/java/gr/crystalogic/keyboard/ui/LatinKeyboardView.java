@@ -6,9 +6,6 @@ import android.util.AttributeSet;
 
 public class LatinKeyboardView extends KeyboardView {
 
-    // TODO: Move this into android.inputmethodservice.Keyboard
-    static final int KEYCODE_LANGUAGE_SWITCH = -101;
-
     public LatinKeyboardView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
