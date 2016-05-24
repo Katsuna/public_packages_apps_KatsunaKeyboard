@@ -75,7 +75,7 @@
         <Key
             android:codes="-4"
             android:keyEdgeFlags="right"
-            android:keyIcon="@drawable/ic_keyboard_return_black_24dp"
+            android:keyIcon="@drawable/keyboard_return"
             android:keyWidth="16%p" />
     </Row>
 
