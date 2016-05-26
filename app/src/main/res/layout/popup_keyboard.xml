@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.inputmethodservice.KeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mykeyboard"
-    style="@style/BackgroundStyle"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keyBackground="@drawable/keybackground"
-    android:keyTextColor="@color/black87"
-    android:keyTextSize="28sp"
-    android:shadowRadius="0" />
+    android:orientation="horizontal">
+
+    <android.inputmethodservice.KeyboardView
+        android:id="@android:id/keyboardView"
+        style="@style/BackgroundStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:keyBackground="@drawable/keybackground"
+        android:keyPreviewLayout="@null"
+        android:keyTextColor="@color/black87"
+        android:keyTextSize="28sp"
+        android:shadowRadius="0" />
+
+    <Button
+        android:id="@android:id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="x" />
+
+</LinearLayout>
