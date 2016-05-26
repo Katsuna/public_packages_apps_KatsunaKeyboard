@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Non focused states -->
-    <item android:drawable="@drawable/ic_close_black_18dp" android:state_focused="false" android:state_pressed="false" android:state_selected="false" />
+    <item android:drawable="@drawable/ic_close_red_24dp" android:state_focused="false" android:state_pressed="false" android:state_selected="false" />
     <!-- Pressed state -->
-    <item android:drawable="@drawable/ic_close_teala200_18dp" android:state_pressed="true" />
+    <item android:drawable="@drawable/ic_close_black_24dp" android:state_pressed="true" />
 </selector>

@@ -9,7 +9,7 @@
     </style>
 
     <style name="BackgroundStyle">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/grey50</item>
     </style>
 
 </resources>
