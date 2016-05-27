@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SettingsTheme">
+        <item name="android:windowBackground">@color/settings_grey</item>
+        <item name="android:colorBackground">@color/settings_grey</item>
+    </style>
+
     <style name="BackgroundStyle">
         <item name="android:background">@color/grey50</item>
     </style>

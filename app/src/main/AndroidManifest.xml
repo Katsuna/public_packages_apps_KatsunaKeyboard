@@ -16,9 +16,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.ImePreferences" android:label="@string/settings_name">
+        <activity
+            android:name=".ui.ImePreferences"
+            android:label="@string/settings_name"
+            android:theme="@style/SettingsTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 

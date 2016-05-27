@@ -13,4 +13,5 @@
 
     <color name="grey50">#FAFAFA</color>
     <color name="tealA200">#64FFDA</color>
+    <color name="settings_grey">#1a1d21</color>
 </resources>
