@@ -36,8 +36,6 @@ public class SoftKeyboard extends InputMethodService
 
     private StringBuilder mComposing = new StringBuilder();
     private int mLastDisplayWidth;
-    private boolean mCapsLock;
-    private long mLastShiftTime;
 
     private LatinKeyboard mSymbolsKeyboard;
     private LatinKeyboard mSymbolsShiftedKeyboard;
@@ -290,7 +288,7 @@ public class SoftKeyboard extends InputMethodService
             if (ei != null && ei.inputType != InputType.TYPE_NULL) {
                 caps = getCurrentInputConnection().getCursorCapsMode(attr.inputType);
             }
-            mInputView.setShifted(mCapsLock || caps != 0);
+            mInputView.setShifted(caps != 0);
         }
     }
 
@@ -396,8 +394,7 @@ public class SoftKeyboard extends InputMethodService
         Keyboard currentKeyboard = mInputView.getKeyboard();
         if (mQwertyKeyboard == currentKeyboard || mQwertyGrKeyboard == currentKeyboard) {
             // Alphabet keyboard
-            checkToggleCapsLock();
-            mInputView.setShifted(mCapsLock || !mInputView.isShifted());
+            mInputView.setShifted(!mInputView.isShifted());
         } else if (currentKeyboard == mSymbolsKeyboard) {
             mSymbolsKeyboard.setShifted(true);
             setLatinKeyboard(mSymbolsShiftedKeyboard);
@@ -441,19 +438,8 @@ public class SoftKeyboard extends InputMethodService
         //mInputMethodManager.switchToNextInputMethod(getToken(), true);
     }
 
-    private void checkToggleCapsLock() {
-        long now = System.currentTimeMillis();
-        if (mLastShiftTime + 800 > now) {
-            mCapsLock = !mCapsLock;
-            mLastShiftTime = 0;
-        } else {
-            mLastShiftTime = now;
-        }
-    }
-
     @Override
     public void swipeLeft() {
-        handleBackspace();
     }
 
     @Override
@@ -462,7 +448,6 @@ public class SoftKeyboard extends InputMethodService
 
     @Override
     public void swipeDown() {
-        handleClose();
     }
 
     @Override
