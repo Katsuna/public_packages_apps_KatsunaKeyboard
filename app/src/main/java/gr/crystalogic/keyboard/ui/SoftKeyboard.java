@@ -396,13 +396,13 @@ public class SoftKeyboard extends InputMethodService
             // Alphabet keyboard
             mInputView.setShifted(!mInputView.isShifted());
         } else if (currentKeyboard == mSymbolsKeyboard) {
-            mSymbolsKeyboard.setShifted(true);
+            mInputView.setShifted(true);
             setLatinKeyboard(mSymbolsShiftedKeyboard);
-            mSymbolsShiftedKeyboard.setShifted(true);
+            mInputView.setShifted(true);
         } else if (currentKeyboard == mSymbolsShiftedKeyboard) {
-            mSymbolsShiftedKeyboard.setShifted(false);
+            mInputView.setShifted(false);
             setLatinKeyboard(mSymbolsKeyboard);
-            mSymbolsKeyboard.setShifted(false);
+            mInputView.setShifted(false);
         }
     }
 

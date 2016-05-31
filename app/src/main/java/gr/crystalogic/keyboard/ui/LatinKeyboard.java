@@ -3,6 +3,7 @@ package gr.crystalogic.keyboard.ui;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.view.inputmethod.EditorInfo;
 
@@ -35,6 +36,8 @@ public class LatinKeyboard extends Keyboard {
      */
     private Key mSavedLanguageSwitchKey;
 
+    private Key mShiftKey;
+
     public LatinKeyboard(Context context, int xmlLayoutResId) {
         super(context, xmlLayoutResId);
     }
@@ -42,15 +45,17 @@ public class LatinKeyboard extends Keyboard {
     @Override
     protected Key createKeyFromXml(Resources res, Row parent, int x, int y,
                                    XmlResourceParser parser) {
-        Key key = new LatinKey(res, parent, x, y, parser);
+        Key key = new Key(res, parent, x, y, parser);
         if (key.codes[0] == -4) {
             mEnterKey = key;
         } else if (key.codes[0] == Keyboard.KEYCODE_MODE_CHANGE) {
             mModeChangeKey = key;
-            mSavedModeChangeKey = new LatinKey(res, parent, x, y, parser);
+            mSavedModeChangeKey = new Key(res, parent, x, y, parser);
         } else if (key.codes[0] == Constants.KEYCODE_LANGUAGE_SWITCH) {
             mLanguageSwitchKey = key;
-            mSavedLanguageSwitchKey = new LatinKey(res, parent, x, y, parser);
+            mSavedLanguageSwitchKey = new Key(res, parent, x, y, parser);
+        } else if (key.codes[0] == Keyboard.KEYCODE_SHIFT) {
+            mShiftKey = key;
         }
         return key;
     }
@@ -117,21 +122,9 @@ public class LatinKeyboard extends Keyboard {
         }
     }
 
-    static class LatinKey extends Keyboard.Key {
-
-        public LatinKey(Resources res, Keyboard.Row parent, int x, int y,
-                        XmlResourceParser parser) {
-            super(res, parent, x, y, parser);
-        }
-
-        /**
-         * Overriding this method so that we can reduce the target area for the key that
-         * closes the keyboard.
-         */
-        @Override
-        public boolean isInside(int x, int y) {
-            return super.isInside(x, codes[0] == KEYCODE_CANCEL ? y - 10 : y);
+    void setShiftIcon(final Drawable icon) {
+        if (mShiftKey != null) {
+            mShiftKey.icon = icon;
         }
     }
-
 }
