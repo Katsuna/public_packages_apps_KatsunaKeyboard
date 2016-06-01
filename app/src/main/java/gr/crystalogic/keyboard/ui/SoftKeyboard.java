@@ -11,6 +11,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.ExtractedText;
+import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
@@ -386,6 +388,15 @@ public class SoftKeyboard extends InputMethodService
         updateShiftKeyState(getCurrentInputEditorInfo());
     }
 
+    private String getCurrentText() {
+        String output = null;
+        ExtractedText extractedText = getCurrentInputConnection().getExtractedText(new ExtractedTextRequest(), 0);
+        if (extractedText != null) {
+            output = extractedText.text.toString();
+        }
+        return output;
+    }
+
     private void handleShift() {
         if (mInputView == null) {
             return;
@@ -408,11 +419,26 @@ public class SoftKeyboard extends InputMethodService
 
     private void handleCharacter(int primaryCode, int[] keyCodes) {
         if (isInputViewShown()) {
-            if (mInputView.isShifted()) {
+            if (mInputView.isShifted() || setNextCharToCapital()) {
                 primaryCode = Character.toUpperCase(primaryCode);
             }
         }
         getCurrentInputConnection().commitText(String.valueOf((char) primaryCode), 1);
+    }
+
+    private boolean setNextCharToCapital() {
+        boolean output = false;
+        String currentText = getCurrentText();
+        if (currentText != null) {
+            if (currentText.trim().isEmpty()) {
+                output = true;
+            }
+
+            if (currentText.trim().endsWith(".")) {
+                output = true;
+            }
+        }
+        return output;
     }
 
     private void handleClose() {
