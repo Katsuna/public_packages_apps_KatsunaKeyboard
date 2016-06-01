@@ -36,7 +36,6 @@ public class SoftKeyboard extends InputMethodService
 
     private LatinKeyboardView mInputView;
 
-    private StringBuilder mComposing = new StringBuilder();
     private int mLastDisplayWidth;
 
     private LatinKeyboard mSymbolsKeyboard;
@@ -122,15 +121,12 @@ public class SoftKeyboard extends InputMethodService
 
         super.onStartInput(attribute, restarting);
 
-        // Reset our state.  We want to do this even if restarting, because
-        // the underlying state of the text editor could have changed in any way.
-        mComposing.setLength(0);
-
         // We are now going to initialize our state based on the type of
         // text being edited.
         InputMethodSubtype subtype;
 
-        switch (attribute.inputType & InputType.TYPE_MASK_CLASS) {
+        int inputTypeMasked = attribute.inputType & InputType.TYPE_MASK_CLASS;
+        switch (inputTypeMasked) {
             case InputType.TYPE_CLASS_NUMBER:
             case InputType.TYPE_CLASS_DATETIME:
                 // Numbers and dates default to the symbols keyboard, with
@@ -157,7 +153,6 @@ public class SoftKeyboard extends InputMethodService
                 // shifted.
                 updateShiftKeyState(attribute);
                 break;
-
             default:
                 // For all unknown input types, default to the alphabetic
                 // keyboard with no special features.
@@ -166,10 +161,22 @@ public class SoftKeyboard extends InputMethodService
                 updateShiftKeyState(attribute);
         }
 
+        //mark input as password input
+        int inputTypeVariationMasked = attribute.inputType & InputType.TYPE_MASK_VARIATION;
+        if (inputTypeVariationMasked  == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
+                inputTypeVariationMasked  == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD ||
+                inputTypeVariationMasked == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD) {
+            passwordInput = true;
+        } else {
+            passwordInput = false;
+        }
+
         // Update the label on the enter key, depending on what the application
         // says it will do.
         //mCurKeyboard.setImeOptions(getResources(), attribute.imeOptions);
     }
+
+    private boolean passwordInput;
 
     @Override
     public void onStartInputView(EditorInfo info, boolean restarting) {
@@ -223,16 +230,6 @@ public class SoftKeyboard extends InputMethodService
                 }
                 break;
 
-            case KeyEvent.KEYCODE_DEL:
-                // Special handling of the delete key: if we currently are
-                // composing text for the user, we want to modify that instead
-                // of let the application to the delete itself.
-                if (mComposing.length() > 0) {
-                    onKey(Keyboard.KEYCODE_DELETE, null);
-                    return true;
-                }
-                break;
-
             case KeyEvent.KEYCODE_ENTER:
                 // Let the underlying text editor always handle these.
                 return false;
@@ -266,16 +263,6 @@ public class SoftKeyboard extends InputMethodService
         }
 
         return super.onKeyDown(keyCode, event);
-    }
-
-    /**
-     * Helper function to commit any text being composed in to the editor.
-     */
-    private void commitTyped(InputConnection inputConnection) {
-        if (mComposing.length() > 0) {
-            inputConnection.commitText(mComposing, mComposing.length());
-            mComposing.setLength(0);
-        }
     }
 
     /**
@@ -366,25 +353,13 @@ public class SoftKeyboard extends InputMethodService
         InputConnection ic = getCurrentInputConnection();
         if (ic == null) return;
         ic.beginBatchEdit();
-        if (mComposing.length() > 0) {
-            commitTyped(ic);
-        }
         ic.commitText(text, 0);
         ic.endBatchEdit();
         updateShiftKeyState(getCurrentInputEditorInfo());
     }
 
     private void handleBackspace() {
-        final int length = mComposing.length();
-        if (length > 1) {
-            mComposing.delete(length - 1, length);
-            getCurrentInputConnection().setComposingText(mComposing, 1);
-        } else if (length > 0) {
-            mComposing.setLength(0);
-            getCurrentInputConnection().commitText("", 0);
-        } else {
-            keyDownUp(KeyEvent.KEYCODE_DEL);
-        }
+        keyDownUp(KeyEvent.KEYCODE_DEL);
         updateShiftKeyState(getCurrentInputEditorInfo());
     }
 
@@ -419,7 +394,8 @@ public class SoftKeyboard extends InputMethodService
 
     private void handleCharacter(int primaryCode, int[] keyCodes) {
         if (isInputViewShown()) {
-            if (mInputView.isShifted() || setNextCharToCapital()) {
+            //force capital if isShift or field is not Password field and rules apply by setNextCharToCapital
+            if (mInputView.isShifted() || (!passwordInput && setNextCharToCapital())) {
                 primaryCode = Character.toUpperCase(primaryCode);
             }
         }
@@ -442,7 +418,6 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private void handleClose() {
-        commitTyped(getCurrentInputConnection());
         requestHideSelf(0);
         mInputView.closing();
     }
