@@ -75,7 +75,7 @@
 
     <Row>
         <Key
-            android:codes="-1"
+            android:codes="@integer/key_shift"
             android:isModifier="true"
             android:isSticky="true"
             android:keyEdgeFlags="left"
@@ -103,7 +103,7 @@
             android:codes="109"
             android:keyLabel="m" />
         <Key
-            android:codes="-5"
+            android:codes="@integer/key_delete"
             android:isRepeatable="true"
             android:keyEdgeFlags="right"
             android:keyIcon="@drawable/ic_backspace_black38_24dp"
@@ -112,11 +112,11 @@
 
     <Row android:rowEdgeFlags="bottom">
         <Key
-            android:codes="-101"
+            android:codes="@integer/key_language"
             android:keyIcon="@drawable/ic_language_black38_24dp"
             android:keyWidth="12%p" />
         <Key
-            android:codes="-2"
+            android:codes="@integer/key_symbol"
             android:keyLabel="\?123"
             android:keyWidth="12%p" />
         <Key
@@ -133,7 +133,7 @@
             android:keyLabel="."
             android:keyWidth="12%p" />
         <Key
-            android:codes="-4"
+            android:codes="@integer/key_return"
             android:keyEdgeFlags="right"
             android:keyIcon="@drawable/keyboard_return"
             android:keyWidth="22%p" />
