@@ -27,7 +27,7 @@ public class LatinKeyboardView extends KeyboardView {
                 if (shifted) {
                     keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_capslock_teala200_24dp, null));
                 } else {
-                    keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_capslock_black_24dp, null));
+                    keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_capslock_black38_24dp, null));
                 }
 
                 // The whole keyboard probably needs to be redrawn
