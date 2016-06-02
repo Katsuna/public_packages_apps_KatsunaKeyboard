@@ -2,7 +2,7 @@
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:horizontalGap="@dimen/horizontalGap"
     android:keyHeight="@dimen/key_height"
-    android:keyWidth="10%p"
+    android:keyWidth="11%p"
     android:verticalGap="@dimen/verticalGap">
 
     <Row>
@@ -48,7 +48,6 @@
     <Row>
         <Key
             android:codes="945"
-            android:horizontalGap="5%p"
             android:keyEdgeFlags="left"
             android:keyLabel="α"
             android:popupCharacters="ά"
@@ -92,27 +91,34 @@
             android:keyWidth="15%p" />
         <Key
             android:codes="950"
-            android:keyLabel="ζ" />
+            android:keyLabel="ζ"
+            android:keyWidth="10%p" />
         <Key
             android:codes="967"
-            android:keyLabel="χ" />
+            android:keyLabel="χ"
+            android:keyWidth="10%p" />
         <Key
             android:codes="968"
-            android:keyLabel="ψ" />
+            android:keyLabel="ψ"
+            android:keyWidth="10%p" />
         <Key
             android:codes="969"
             android:keyLabel="ω"
+            android:keyWidth="10%p"
             android:popupCharacters="ώ"
             android:popupKeyboard="@xml/kbd_popup_template" />
         <Key
             android:codes="946"
-            android:keyLabel="β" />
+            android:keyLabel="β"
+            android:keyWidth="10%p" />
         <Key
             android:codes="957"
-            android:keyLabel="ν" />
+            android:keyLabel="ν"
+            android:keyWidth="10%p" />
         <Key
             android:codes="956"
-            android:keyLabel="μ" />
+            android:keyLabel="μ"
+            android:keyWidth="10%p" />
         <Key
             android:codes="-5"
             android:isRepeatable="true"
