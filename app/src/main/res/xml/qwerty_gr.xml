@@ -87,7 +87,7 @@
             android:isModifier="true"
             android:isSticky="true"
             android:keyEdgeFlags="left"
-            android:keyIcon="@drawable/ic_keyboard_capslock_black38_24dp"
+            android:keyIcon="@drawable/small_pressed_a"
             android:keyWidth="15%p" />
         <Key
             android:codes="950"

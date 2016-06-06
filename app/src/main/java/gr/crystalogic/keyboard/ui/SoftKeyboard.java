@@ -267,13 +267,14 @@ public class SoftKeyboard extends InputMethodService
      */
     private void updateShiftKeyState(EditorInfo attr) {
         if (attr != null
-                && mInputView != null && mQwertyKeyboard == mInputView.getKeyboard()) {
+                && mInputView != null
+                && (mQwertyKeyboard == mInputView.getKeyboard() || mQwertyGrKeyboard == mInputView.getKeyboard()) ) {
             int caps = 0;
             EditorInfo ei = getCurrentInputEditorInfo();
             if (ei != null && ei.inputType != InputType.TYPE_NULL) {
                 caps = getCurrentInputConnection().getCursorCapsMode(attr.inputType);
             }
-            mInputView.setShifted(caps != 0);
+            mInputView.setShiftKey(caps != 0, true);
         }
     }
 
@@ -310,7 +311,7 @@ public class SoftKeyboard extends InputMethodService
                 setLatinKeyboard(getKeyboard(subtype));
             } else {
                 setLatinKeyboard(mSymbolsKeyboard);
-                mSymbolsKeyboard.setShifted(false);
+                mInputView.setShiftKey(false, false);
             }
         } else {
             handleCharacter(primaryCode);
@@ -376,15 +377,15 @@ public class SoftKeyboard extends InputMethodService
         Keyboard currentKeyboard = mInputView.getKeyboard();
         if (mQwertyKeyboard == currentKeyboard || mQwertyGrKeyboard == currentKeyboard) {
             // Alphabet keyboard
-            mInputView.setShifted(!mInputView.isShifted());
+            mInputView.setShiftKey(!mInputView.isShifted(), true);
         } else if (currentKeyboard == mSymbolsKeyboard) {
-            mInputView.setShifted(true);
+            mInputView.setShiftKey(true, false);
             setLatinKeyboard(mSymbolsShiftedKeyboard);
-            mInputView.setShifted(true);
+            mInputView.setShiftKey(true, false);
         } else if (currentKeyboard == mSymbolsShiftedKeyboard) {
-            mInputView.setShifted(false);
+            mInputView.setShiftKey(false, false);
             setLatinKeyboard(mSymbolsKeyboard);
-            mInputView.setShifted(false);
+            mInputView.setShiftKey(false, false);
         }
     }
 

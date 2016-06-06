@@ -17,17 +17,24 @@ public class LatinKeyboardView extends KeyboardView {
         super(context, attrs, defStyle);
     }
 
-    @Override
-    public boolean setShifted(boolean shifted) {
+    public boolean setShiftKey(boolean shifted, boolean qwertyKeyboard) {
         LatinKeyboard keyboard = (LatinKeyboard) getKeyboard();
         if (keyboard != null) {
             if (keyboard.setShifted(shifted)) {
 
                 //shift state changed => show proper icon
                 if (shifted) {
-                    keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_capslock_teala200_24dp, null));
+                    if (qwertyKeyboard) {
+                        keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.capital_pressed_a, null));
+                    } else {
+                        keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_capslock_teala200_24dp, null));
+                    }
                 } else {
-                    keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_capslock_black38_24dp, null));
+                    if (qwertyKeyboard) {
+                        keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.small_pressed_a, null));
+                    } else {
+                        keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_capslock_black38_24dp, null));
+                    }
                 }
 
                 // The whole keyboard probably needs to be redrawn
