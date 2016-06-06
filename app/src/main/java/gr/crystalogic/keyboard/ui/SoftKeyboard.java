@@ -6,7 +6,6 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.os.IBinder;
 import android.text.InputType;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -18,11 +17,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import gr.crystalogic.keyboard.R;
+import gr.crystalogic.keyboard.utils.Log;
 
 public class SoftKeyboard extends InputMethodService
         implements KeyboardView.OnKeyboardActionListener {
 
-    private static final String TAG = "SoftKeyboard";
     private InputMethodManager mInputMethodManager;
 
     private LatinKeyboardView mInputView;
@@ -51,7 +50,7 @@ public class SoftKeyboard extends InputMethodService
     @Override
     public void onInitializeInterface() {
 
-        Log.e(TAG, "onInitializeInterface");
+        Log.d(this, "onInitializeInterface");
 
         if (mQwertyKeyboard != null) {
             // Configuration changes can happen after the keyboard gets recreated,
@@ -76,7 +75,7 @@ public class SoftKeyboard extends InputMethodService
      */
     @Override
     public View onCreateInputView() {
-        Log.e(TAG, "onCreateInputView");
+        Log.d(this, "onCreateInputView");
 
         mInputView = (LatinKeyboardView) getLayoutInflater().inflate(R.layout.input, null);
         mInputView.setOnKeyboardActionListener(this);
@@ -104,7 +103,7 @@ public class SoftKeyboard extends InputMethodService
      */
     @Override
     public void onStartInput(EditorInfo attribute, boolean restarting) {
-        Log.e(TAG, "onStartInput");
+        Log.d(this, "onStartInput");
 
         super.onStartInput(attribute, restarting);
 
@@ -163,7 +162,7 @@ public class SoftKeyboard extends InputMethodService
 
     @Override
     public void onStartInputView(EditorInfo info, boolean restarting) {
-        Log.e(TAG, "onStartInputView");
+        Log.d(this, "onStartInputView");
 
         super.onStartInputView(info, restarting);
 
@@ -176,7 +175,7 @@ public class SoftKeyboard extends InputMethodService
 
     @Override
     public void onCurrentInputMethodSubtypeChanged(InputMethodSubtype subtype) {
-        Log.e(TAG, "onCurrentInputMethodSubtypeChanged");
+        Log.d(this, "onCurrentInputMethodSubtypeChanged");
 
         mCurKeyboard = getKeyboard(subtype);
         setLatinKeyboard(mCurKeyboard);
@@ -220,7 +219,7 @@ public class SoftKeyboard extends InputMethodService
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
 
-        Log.e(TAG, "onKey:" + primaryCode);
+        Log.d(this, "onKey:" + primaryCode);
 
         if (primaryCode == Keyboard.KEYCODE_DELETE) {
             handleBackspace();
@@ -274,7 +273,7 @@ public class SoftKeyboard extends InputMethodService
     @Override
     public void onText(CharSequence text) {
 
-        Log.e(TAG, "onText");
+        Log.d(this, "onText");
 
         InputConnection ic = getCurrentInputConnection();
         if (ic == null) return;
