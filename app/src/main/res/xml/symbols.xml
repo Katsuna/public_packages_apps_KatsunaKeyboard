@@ -114,30 +114,30 @@
 
     <Row android:rowEdgeFlags="bottom">
         <Key
-            android:codes="@integer/key_language"
-            android:keyIcon="@drawable/ic_language_black38_24dp"
-            android:keyWidth="12%p" />
-        <Key
             android:codes="@integer/key_symbol"
             android:keyLabel="ABC"
-            android:keyWidth="12%p" />
+            android:keyWidth="14%p" />
+        <Key
+            android:codes="@integer/key_language"
+            android:keyIcon="@drawable/ic_language_black38_24dp"
+            android:keyWidth="14%p" />
         <Key
             android:codes="44"
             android:keyLabel=","
-            android:keyWidth="12%p" />
+            android:keyWidth="14%p" />
         <Key
             android:codes="32"
             android:isRepeatable="true"
             android:keyIcon="@drawable/ic_space_bar_black_36dp"
-            android:keyWidth="30%p" />
+            android:keyWidth="20%p" />
         <Key
             android:codes="46"
             android:keyLabel="."
-            android:keyWidth="12%p" />
+            android:keyWidth="14%p" />
         <Key
             android:codes="@integer/key_return"
             android:keyEdgeFlags="right"
             android:keyIcon="@drawable/keyboard_return"
-            android:keyWidth="22%p" />
+            android:keyWidth="24%p" />
     </Row>
 </Keyboard>
