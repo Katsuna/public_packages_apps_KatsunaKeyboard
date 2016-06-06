@@ -7,4 +7,6 @@
     <dimen name="horizontalGap">0dp</dimen>
     <dimen name="verticalGap">0dp</dimen>
 
+    <dimen name="keyTextSize">24sp</dimen>
+
 </resources>

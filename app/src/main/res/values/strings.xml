@@ -22,4 +22,6 @@
     <string name="phoneField">Phone field</string>
     <string name="passwordField">Password field</string>
 
+    <string name="close_popup_keyboard">Close popup keyboard</string>
+
 </resources>
