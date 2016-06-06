@@ -22,15 +22,6 @@ import gr.crystalogic.keyboard.R;
 public class SoftKeyboard extends InputMethodService
         implements KeyboardView.OnKeyboardActionListener {
 
-    /**
-     * This boolean indicates the optional example code for performing
-     * processing of hard keys in addition to regular text generation
-     * from on-screen interaction.  It would be used for input methods that
-     * perform language translations (such as converting text entered on
-     * a QWERTY keyboard to Chinese), but may not be used for input methods
-     * that are primarily intended to be used for on-screen text entry.
-     */
-    private static final boolean PROCESS_HARD_KEYS = true;
     private static final String TAG = "SoftKeyboard";
     private InputMethodManager mInputMethodManager;
 
@@ -47,10 +38,6 @@ public class SoftKeyboard extends InputMethodService
     private LatinKeyboard mCurKeyboard;
     private EditorInfo mCurrentEditorInfo;
 
-    /**
-     * Main initialization of the input method component.  Be sure to call
-     * to super class.
-     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -201,64 +188,6 @@ public class SoftKeyboard extends InputMethodService
         } else {
             return mQwertyKeyboard;
         }
-    }
-
-    /**
-     * Use this to monitor key events being delivered to the application.
-     * We get first crack at them, and can either resume them or let them
-     * continue to the app.
-     */
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        Log.e(TAG, "onKeyDown");
-
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                // The InputMethodService already takes care of the back
-                // key for us, to dismiss the input method if it is shown.
-                // However, our keyboard could be showing a pop-up window
-                // that back should dismiss, so we first allow it to do that.
-                if (event.getRepeatCount() == 0 && mInputView != null) {
-                    if (mInputView.handleBack()) {
-                        return true;
-                    }
-                }
-                break;
-
-            case KeyEvent.KEYCODE_ENTER:
-                // Let the underlying text editor always handle these.
-                return false;
-
-            default:
-                // For all other keys, if we want to do transformations on
-                // text being entered with a hard keyboard, we need to process
-                // it and do the appropriate action.
-                if (PROCESS_HARD_KEYS) {
-                    if (keyCode == KeyEvent.KEYCODE_SPACE
-                            && (event.getMetaState() & KeyEvent.META_ALT_ON) != 0) {
-                        // A silly example: in our input method, Alt+Space
-                        // is a shortcut for 'android' in lower case.
-                        InputConnection ic = getCurrentInputConnection();
-                        if (ic != null) {
-                            // First, tell the editor that it is no longer in the
-                            // shift state, since we are consuming this.
-                            ic.clearMetaKeyStates(KeyEvent.META_ALT_ON);
-                            keyDownUp(KeyEvent.KEYCODE_A);
-                            keyDownUp(KeyEvent.KEYCODE_N);
-                            keyDownUp(KeyEvent.KEYCODE_D);
-                            keyDownUp(KeyEvent.KEYCODE_R);
-                            keyDownUp(KeyEvent.KEYCODE_O);
-                            keyDownUp(KeyEvent.KEYCODE_I);
-                            keyDownUp(KeyEvent.KEYCODE_D);
-                            // And we consume this event.
-                            return true;
-                        }
-                    }
-                }
-        }
-
-        return super.onKeyDown(keyCode, event);
     }
 
     /**
