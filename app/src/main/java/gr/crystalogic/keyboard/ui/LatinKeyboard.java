@@ -5,13 +5,9 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
-import android.view.inputmethod.EditorInfo;
 
-import gr.crystalogic.keyboard.R;
+class LatinKeyboard extends Keyboard {
 
-public class LatinKeyboard extends Keyboard {
-
-    private Key mEnterKey;
     /**
      * Stores the current state of the mode change key. Its width will be dynamically updated to
      * match the region of mModeChangeKey when mModeChangeKey becomes invisible.
@@ -46,9 +42,7 @@ public class LatinKeyboard extends Keyboard {
     protected Key createKeyFromXml(Resources res, Row parent, int x, int y,
                                    XmlResourceParser parser) {
         Key key = new Key(res, parent, x, y, parser);
-        if (key.codes[0] == -4) {
-            mEnterKey = key;
-        } else if (key.codes[0] == Keyboard.KEYCODE_MODE_CHANGE) {
+        if (key.codes[0] == Keyboard.KEYCODE_MODE_CHANGE) {
             mModeChangeKey = key;
             mSavedModeChangeKey = new Key(res, parent, x, y, parser);
         } else if (key.codes[0] == Constants.KEYCODE_LANGUAGE_SWITCH) {
@@ -91,34 +85,6 @@ public class LatinKeyboard extends Keyboard {
                 mLanguageSwitchKey.icon = null;
                 mLanguageSwitchKey.iconPreview = null;
             }
-        }
-    }
-
-    /**
-     * This looks at the ime options given by the current editor, to set the
-     * appropriate label on the keyboard's enter key (if it has one).
-     */
-    void setImeOptions(Resources res, int options) {
-        if (mEnterKey == null) {
-            return;
-        }
-
-        switch (options & (EditorInfo.IME_MASK_ACTION | EditorInfo.IME_FLAG_NO_ENTER_ACTION)) {
-            case EditorInfo.IME_ACTION_GO:
-                mEnterKey.label = res.getText(R.string.label_go_key);
-                break;
-            case EditorInfo.IME_ACTION_NEXT:
-                mEnterKey.label = res.getText(R.string.label_next_key);
-                break;
-            case EditorInfo.IME_ACTION_SEARCH:
-                mEnterKey.label = res.getText(R.string.label_search_key);
-                break;
-            case EditorInfo.IME_ACTION_SEND:
-                mEnterKey.label = res.getText(R.string.label_send_key);
-                break;
-            default:
-                mEnterKey.label = res.getText(R.string.label_done_key);
-                break;
         }
     }
 

@@ -30,7 +30,7 @@ public class SoftKeyboard extends InputMethodService
      * a QWERTY keyboard to Chinese), but may not be used for input methods
      * that are primarily intended to be used for on-screen text entry.
      */
-    static final boolean PROCESS_HARD_KEYS = true;
+    private static final boolean PROCESS_HARD_KEYS = true;
     private static final String TAG = "SoftKeyboard";
     private InputMethodManager mInputMethodManager;
 
@@ -163,13 +163,9 @@ public class SoftKeyboard extends InputMethodService
 
         //mark input as password input
         int inputTypeVariationMasked = attribute.inputType & InputType.TYPE_MASK_VARIATION;
-        if (inputTypeVariationMasked  == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
-                inputTypeVariationMasked  == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD ||
-                inputTypeVariationMasked == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD) {
-            passwordInput = true;
-        } else {
-            passwordInput = false;
-        }
+        passwordInput = inputTypeVariationMasked == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
+                inputTypeVariationMasked == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD ||
+                inputTypeVariationMasked == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD;
 
         // Update the label on the enter key, depending on what the application
         // says it will do.
@@ -317,7 +313,7 @@ public class SoftKeyboard extends InputMethodService
                 mSymbolsKeyboard.setShifted(false);
             }
         } else {
-            handleCharacter(primaryCode, keyCodes);
+            handleCharacter(primaryCode);
         }
     }
 
@@ -392,7 +388,7 @@ public class SoftKeyboard extends InputMethodService
         }
     }
 
-    private void handleCharacter(int primaryCode, int[] keyCodes) {
+    private void handleCharacter(int primaryCode) {
         if (isInputViewShown()) {
             //force capital if isShift or field is not Password field and rules apply by setNextCharToCapital
             if (mInputView.isShifted() || (!passwordInput && setNextCharToCapital())) {
