@@ -36,6 +36,8 @@ public class SoftKeyboard extends InputMethodService
 
     private LatinKeyboard mCurKeyboard;
     private EditorInfo mCurrentEditorInfo;
+    private boolean passwordInput;
+    private boolean autoShiftOn;
 
     @Override
     public void onCreate() {
@@ -134,17 +136,12 @@ public class SoftKeyboard extends InputMethodService
                 subtype = mInputMethodManager.getCurrentInputMethodSubtype();
                 mCurKeyboard = getKeyboard(subtype);
 
-                // We also want to look at the current state of the editor
-                // to decide whether our alphabetic keyboard should start out
-                // shifted.
-                updateShiftKeyState(attribute);
                 break;
             default:
                 // For all unknown input types, default to the alphabetic
                 // keyboard with no special features.
                 subtype = mInputMethodManager.getCurrentInputMethodSubtype();
                 mCurKeyboard = getKeyboard(subtype);
-                updateShiftKeyState(attribute);
         }
 
         //mark input as password input
@@ -158,8 +155,6 @@ public class SoftKeyboard extends InputMethodService
         //mCurKeyboard.setImeOptions(getResources(), attribute.imeOptions);
     }
 
-    private boolean passwordInput;
-
     @Override
     public void onStartInputView(EditorInfo info, boolean restarting) {
         Log.d(this, "onStartInputView");
@@ -171,6 +166,8 @@ public class SoftKeyboard extends InputMethodService
         // Apply the selected keyboard to the input view.
         setLatinKeyboard(mCurKeyboard);
         mInputView.closing();
+
+        setAutoShift();
     }
 
     @Override
@@ -186,23 +183,6 @@ public class SoftKeyboard extends InputMethodService
             return mQwertyGrKeyboard;
         } else {
             return mQwertyKeyboard;
-        }
-    }
-
-    /**
-     * Helper to update the shift state of our keyboard based on the initial
-     * editor state.
-     */
-    private void updateShiftKeyState(EditorInfo attr) {
-        if (attr != null
-                && mInputView != null
-                && (mQwertyKeyboard == mInputView.getKeyboard() || mQwertyGrKeyboard == mInputView.getKeyboard()) ) {
-            int caps = 0;
-            EditorInfo ei = getCurrentInputEditorInfo();
-            if (ei != null && ei.inputType != InputType.TYPE_NULL) {
-                caps = getCurrentInputConnection().getCursorCapsMode(attr.inputType);
-            }
-            mInputView.setShiftKey(caps != 0, true);
         }
     }
 
@@ -280,12 +260,11 @@ public class SoftKeyboard extends InputMethodService
         ic.beginBatchEdit();
         ic.commitText(text, 0);
         ic.endBatchEdit();
-        updateShiftKeyState(getCurrentInputEditorInfo());
+        setAutoShift();
     }
 
     private void handleBackspace() {
         keyDownUp(KeyEvent.KEYCODE_DEL);
-        updateShiftKeyState(getCurrentInputEditorInfo());
     }
 
     private String getCurrentText() {
@@ -320,11 +299,40 @@ public class SoftKeyboard extends InputMethodService
     private void handleCharacter(int primaryCode) {
         if (isInputViewShown()) {
             //force capital if isShift or field is not Password field and rules apply by setNextCharToCapital
-            if (mInputView.isShifted() || (!passwordInput && setNextCharToCapital())) {
+            if (mInputView.isShifted()) {
                 primaryCode = Character.toUpperCase(primaryCode);
             }
         }
         getCurrentInputConnection().commitText(String.valueOf((char) primaryCode), 1);
+        setAutoShift();
+    }
+
+    private void setAutoShift() {
+        if (!passwordInput) {
+            if (setNextCharToCapital()) {
+                Keyboard currentKeyboard = mInputView.getKeyboard();
+                if (isQwertyKeyboard(currentKeyboard)) {
+                    //Autoshift only if keyboard isn't manually shifted
+                    if (!currentKeyboard.isShifted()) {
+                        mInputView.setShiftKey(true, true);
+                        Log.d(this, "setAutoShift activated!");
+                        autoShiftOn = true;
+                    } else {
+                        Log.d(this, "setAutoShift not activated since it's already active!");
+                    }
+                }
+            } else if (autoShiftOn) {
+                if (isQwertyKeyboard(mInputView.getKeyboard())) {
+                    mInputView.setShiftKey(false, true);
+                    Log.d(this, "setAutoShift deactivated!");
+                    autoShiftOn = false;
+                }
+            }
+        }
+    }
+
+    private boolean isQwertyKeyboard(Keyboard keyboard) {
+        return mQwertyKeyboard == keyboard || mQwertyGrKeyboard == keyboard;
     }
 
     private boolean setNextCharToCapital() {
