@@ -282,7 +282,7 @@ public class SoftKeyboard extends InputMethodService
         }
 
         Keyboard currentKeyboard = mInputView.getKeyboard();
-        if (mQwertyKeyboard == currentKeyboard || mQwertyGrKeyboard == currentKeyboard) {
+        if (isQwertyKeyboard(currentKeyboard)) {
             // Alphabet keyboard
             mInputView.setShiftKey(!mInputView.isShifted(), true);
         } else if (currentKeyboard == mSymbolsKeyboard) {
