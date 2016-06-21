@@ -25,13 +25,13 @@ public class LatinKeyboardView extends KeyboardView {
                 //shift state changed => show proper icon
                 if (shifted) {
                     if (qwertyKeyboard) {
-                        keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.capital_pressed_a, null));
+                        keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.small_pressed_t, null));
                     } else {
                         keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_capslock_teala200_24dp, null));
                     }
                 } else {
                     if (qwertyKeyboard) {
-                        keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.small_pressed_a, null));
+                        keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.capital_pressed_t, null));
                     } else {
                         keyboard.setShiftIcon(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_keyboard_capslock_black38_24dp, null));
                     }
