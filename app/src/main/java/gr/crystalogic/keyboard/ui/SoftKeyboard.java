@@ -337,7 +337,17 @@ public class SoftKeyboard extends InputMethodService
 
     private boolean setNextCharToCapital() {
         boolean output = false;
-        String currentText = getCurrentText();
+        String currentText = null;
+        ExtractedText extractedText = getCurrentInputConnection().getExtractedText(new ExtractedTextRequest(), 0);
+
+        if (extractedText != null) {
+            currentText = extractedText.text.toString();
+            //turn off auto caps lock if cursor is not at the last of the current text
+            if (extractedText.selectionEnd != currentText.length()) {
+                return false;
+            }
+        }
+
         if (currentText != null) {
             if (currentText.trim().isEmpty()) {
                 output = true;
