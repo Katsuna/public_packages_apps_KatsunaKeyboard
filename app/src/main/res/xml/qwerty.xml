@@ -79,7 +79,7 @@
             android:isModifier="true"
             android:isSticky="true"
             android:keyEdgeFlags="left"
-            android:keyIcon="@drawable/small_pressed_a"
+            android:keyIcon="@drawable/small_pressed_t"
             android:keyWidth="15%p" />
         <Key
             android:codes="122"
