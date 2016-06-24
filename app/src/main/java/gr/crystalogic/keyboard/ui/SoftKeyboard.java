@@ -179,10 +179,15 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private LatinKeyboard getKeyboard(InputMethodSubtype subtype) {
-        if (subtype.getLocale().equals("en_GB")) {
-            return mQwertyGrKeyboard;
-        } else {
-            return mQwertyKeyboard;
+        // Transform if statement to switch, in order to support multiple languages in the future
+        // TO-DO: Replace getLocale (depreciated in API 24) with getLanguageTag
+        switch (subtype.getLocale()) {
+            case "en_US":
+                return mQwertyKeyboard;
+            case "el_GR":
+                return mQwertyGrKeyboard;
+            default:
+                return mQwertyKeyboard;
         }
     }
 
