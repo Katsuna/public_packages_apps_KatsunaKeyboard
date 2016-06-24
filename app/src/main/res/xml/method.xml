@@ -12,4 +12,9 @@
         android:imeSubtypeMode="keyboard"
         android:label="@string/label_subtype_el" />
 
+    <subtype
+        android:imeSubtypeLocale="ru_RU"
+        android:imeSubtypeMode="keyboard"
+        android:label="@string/label_subtype_ru" />
+
 </input-method>

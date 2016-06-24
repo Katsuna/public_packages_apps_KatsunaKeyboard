@@ -32,6 +32,7 @@ public class SoftKeyboard extends InputMethodService
     private LatinKeyboard mSymbolsShiftedKeyboard;
     private LatinKeyboard mQwertyKeyboard;
     private LatinKeyboard mQwertyGrKeyboard;
+    private LatinKeyboard mEastSlavicKeyboard;
     private LatinKeyboard mPhoneKeyboard;
 
     private LatinKeyboard mCurKeyboard;
@@ -64,6 +65,7 @@ public class SoftKeyboard extends InputMethodService
         }
         mQwertyKeyboard = new LatinKeyboard(this, R.xml.qwerty);
         mQwertyGrKeyboard = new LatinKeyboard(this, R.xml.qwerty_gr);
+        mEastSlavicKeyboard = new LatinKeyboard(this, R.xml.east_slavic);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
         mPhoneKeyboard = new LatinKeyboard(this, R.xml.phone);
@@ -186,6 +188,8 @@ public class SoftKeyboard extends InputMethodService
                 return mQwertyKeyboard;
             case "el_GR":
                 return mQwertyGrKeyboard;
+            case "ru_RU":
+                return mEastSlavicKeyboard;
             default:
                 return mQwertyKeyboard;
         }
