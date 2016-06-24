@@ -341,7 +341,7 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private boolean isQwertyKeyboard(Keyboard keyboard) {
-        return mQwertyKeyboard == keyboard || mQwertyGrKeyboard == keyboard;
+        return mSymbolsKeyboard != keyboard || mSymbolsShiftedKeyboard != keyboard;
     }
 
     private boolean setNextCharToCapital() {
