@@ -36,7 +36,7 @@ public class SoftKeyboard extends InputMethodService
 
     private LatinKeyboard mCurKeyboard;
     private EditorInfo mCurrentEditorInfo;
-    private boolean passwordInput;
+    private boolean inputWithAutoCapsDisabled;
     private boolean autoShiftOn;
 
     @Override
@@ -145,10 +145,21 @@ public class SoftKeyboard extends InputMethodService
         }
 
         //mark input as password input
-        int inputTypeVariationMasked = attribute.inputType & InputType.TYPE_MASK_VARIATION;
-        passwordInput = inputTypeVariationMasked == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
-                inputTypeVariationMasked == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD ||
-                inputTypeVariationMasked == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD;
+        int variation = attribute.inputType & InputType.TYPE_MASK_VARIATION;
+        inputWithAutoCapsDisabled = variation == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
+                variation == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD ||
+                variation == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD;
+
+        if (variation == EditorInfo.TYPE_TEXT_VARIATION_URI) {
+            inputWithAutoCapsDisabled = true;
+        }
+
+        // If it's not multiline and the autoCorrect flag is not set, then
+        // don't correct
+        if ((attribute.inputType & EditorInfo.TYPE_TEXT_FLAG_AUTO_CORRECT) == 0
+                && (attribute.inputType & EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE) == 0) {
+            inputWithAutoCapsDisabled = true;
+        }
 
         // Update the label on the enter key, depending on what the application
         // says it will do.
@@ -308,7 +319,7 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private void setAutoShift() {
-        if (!passwordInput) {
+        if (!inputWithAutoCapsDisabled) {
             if (setNextCharToCapital()) {
                 Keyboard currentKeyboard = mInputView.getKeyboard();
                 if (isQwertyKeyboard(currentKeyboard)) {
