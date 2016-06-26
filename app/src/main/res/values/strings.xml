@@ -19,4 +19,7 @@
 
     <string name="close_popup_keyboard">Close popup keyboard</string>
 
+    <string name="switch_1">"&amp;\\;"</string>
+    <string name="switch_2">"+=("</string>
+    <string name="switch_3">".?!"</string>
 </resources>

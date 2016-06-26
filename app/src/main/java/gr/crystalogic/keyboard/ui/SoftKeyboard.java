@@ -30,6 +30,7 @@ public class SoftKeyboard extends InputMethodService
 
     private LatinKeyboard mSymbolsKeyboard;
     private LatinKeyboard mSymbolsShiftedKeyboard;
+    private LatinKeyboard mSymbolsShifted2Keyboard;
     private LatinKeyboard mQwertyKeyboard;
     private LatinKeyboard mQwertyGrKeyboard;
     private LatinKeyboard mPhoneKeyboard;
@@ -66,6 +67,7 @@ public class SoftKeyboard extends InputMethodService
         mQwertyGrKeyboard = new LatinKeyboard(this, R.xml.qwerty_gr);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
+        mSymbolsShifted2Keyboard = new LatinKeyboard(this, R.xml.symbols_shift2);
         mPhoneKeyboard = new LatinKeyboard(this, R.xml.phone);
     }
 
@@ -227,7 +229,7 @@ public class SoftKeyboard extends InputMethodService
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
             Keyboard current = mInputView.getKeyboard();
-            if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) {
+            if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard || current == mSymbolsShifted2Keyboard) {
                 InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
                 setLatinKeyboard(getKeyboard(subtype));
             } else {
@@ -303,6 +305,10 @@ public class SoftKeyboard extends InputMethodService
             setLatinKeyboard(mSymbolsShiftedKeyboard);
             mInputView.setShiftKey(true, false);
         } else if (currentKeyboard == mSymbolsShiftedKeyboard) {
+            mInputView.setShiftKey(false, false);
+            setLatinKeyboard(mSymbolsShifted2Keyboard);
+            mInputView.setShiftKey(false, false);
+        } else if (currentKeyboard == mSymbolsShifted2Keyboard) {
             mInputView.setShiftKey(false, false);
             setLatinKeyboard(mSymbolsKeyboard);
             mInputView.setShiftKey(false, false);
