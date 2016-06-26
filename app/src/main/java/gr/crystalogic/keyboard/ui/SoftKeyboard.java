@@ -144,13 +144,15 @@ public class SoftKeyboard extends InputMethodService
                 mCurKeyboard = getKeyboard(subtype);
         }
 
-        //mark input as password input
+        //disable auto caps feature for password fields
         int variation = attribute.inputType & InputType.TYPE_MASK_VARIATION;
         inputWithAutoCapsDisabled = variation == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
                 variation == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD ||
                 variation == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD;
 
-        if (variation == EditorInfo.TYPE_TEXT_VARIATION_URI) {
+        //disable auto caps feature uri fields and email fields
+        if (variation == EditorInfo.TYPE_TEXT_VARIATION_URI ||
+                variation == EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS) {
             inputWithAutoCapsDisabled = true;
         }
 
