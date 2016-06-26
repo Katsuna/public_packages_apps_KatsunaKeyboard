@@ -360,7 +360,7 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private boolean isQwertyKeyboard(Keyboard keyboard) {
-        return mSymbolsKeyboard != keyboard && mSymbolsShiftedKeyboard != keyboard;
+        return mSymbolsKeyboard != keyboard && mSymbolsShiftedKeyboard != keyboard && mSymbolsShifted2Keyboard != keyboard;
     }
 
     private boolean setNextCharToCapital() {
