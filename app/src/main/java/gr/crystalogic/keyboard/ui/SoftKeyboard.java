@@ -33,6 +33,7 @@ public class SoftKeyboard extends InputMethodService
     private LatinKeyboard mSymbolsShifted2Keyboard;
     private LatinKeyboard mQwertyKeyboard;
     private LatinKeyboard mQwertyGrKeyboard;
+    private LatinKeyboard mEastSlavicKeyboard;
     private LatinKeyboard mPhoneKeyboard;
 
     private LatinKeyboard mCurKeyboard;
@@ -65,6 +66,7 @@ public class SoftKeyboard extends InputMethodService
         }
         mQwertyKeyboard = new LatinKeyboard(this, R.xml.qwerty);
         mQwertyGrKeyboard = new LatinKeyboard(this, R.xml.qwerty_gr);
+        mEastSlavicKeyboard = new LatinKeyboard(this, R.xml.east_slavic);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
         mSymbolsShifted2Keyboard = new LatinKeyboard(this, R.xml.symbols_shift2);
@@ -194,10 +196,17 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private LatinKeyboard getKeyboard(InputMethodSubtype subtype) {
-        if (subtype.getLocale().equals("en_GB")) {
-            return mQwertyGrKeyboard;
-        } else {
-            return mQwertyKeyboard;
+        // Transform if statement to switch, in order to support multiple languages in the future
+        // TO-DO: Replace getLocale (depreciated in API 24) with getLanguageTag
+        switch (subtype.getLocale()) {
+            case "en_US":
+                return mQwertyKeyboard;
+            case "el_GR":
+                return mQwertyGrKeyboard;
+            case "ru_RU":
+                return mEastSlavicKeyboard;
+            default:
+                return mQwertyKeyboard;
         }
     }
 
@@ -351,7 +360,7 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private boolean isQwertyKeyboard(Keyboard keyboard) {
-        return mQwertyKeyboard == keyboard || mQwertyGrKeyboard == keyboard;
+        return mSymbolsKeyboard != keyboard && mSymbolsShiftedKeyboard != keyboard;
     }
 
     private boolean setNextCharToCapital() {

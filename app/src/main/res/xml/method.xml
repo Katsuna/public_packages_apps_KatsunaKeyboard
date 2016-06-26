@@ -8,8 +8,13 @@
         android:label="@string/label_subtype_en" />
 
     <subtype
-        android:imeSubtypeLocale="en_GB"
+        android:imeSubtypeLocale="el_GR"
         android:imeSubtypeMode="keyboard"
         android:label="@string/label_subtype_el" />
+
+    <subtype
+        android:imeSubtypeLocale="ru_RU"
+        android:imeSubtypeMode="keyboard"
+        android:label="@string/label_subtype_ru" />
 
 </input-method>
