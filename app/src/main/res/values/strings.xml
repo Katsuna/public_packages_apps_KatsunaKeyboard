@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Keyboard</string>
+    <string name="app_name">Katsuna Keyboard</string>
     <string name="simple_ime">Katsuna IME</string>
 
 
@@ -10,9 +10,16 @@
     <string name="settings_name">Katsuna Keyboard Settings</string>
     <string name="language_selection_title">Input languages</string>
     <string name="select_language">Select input languages</string>
+    <string name="label_subtype_ar">Arabic</string>
     <string name="label_subtype_en">English</string>
+    <string name="label_subtype_fr">French</string>
+    <string name="label_subtype_de">German</string>
     <string name="label_subtype_el">Greek</string>
+    <string name="label_subtype_it">Italian</string>
+    <string name="label_subtype_pt">Portuguese</string>
     <string name="label_subtype_ru">Russian</string>
+    <string name="label_subtype_es">Spanish</string>
+    <string name="label_subtype_tr">Turkish</string>
 
     <string name="textField">Text field</string>
     <string name="phoneField">Phone field</string>

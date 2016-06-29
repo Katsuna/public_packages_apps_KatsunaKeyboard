@@ -31,8 +31,15 @@ public class SoftKeyboard extends InputMethodService
     private LatinKeyboard mSymbolsKeyboard;
     private LatinKeyboard mSymbolsShiftedKeyboard;
     private LatinKeyboard mQwertyKeyboard;
+    private LatinKeyboard mQwertyDeKeyboard;
+    private LatinKeyboard mQwertyEsKeyboard;
+    private LatinKeyboard mAzertyFrKeyboard;
     private LatinKeyboard mQwertyGrKeyboard;
+    private LatinKeyboard mQwertyItKeyboard;
+    private LatinKeyboard mQwertyPtKeyboard;
+    private LatinKeyboard mQwertyTrKeyboard;
     private LatinKeyboard mEastSlavicKeyboard;
+    private LatinKeyboard mArabicKeyboard;
     private LatinKeyboard mPhoneKeyboard;
 
     private LatinKeyboard mCurKeyboard;
@@ -64,8 +71,15 @@ public class SoftKeyboard extends InputMethodService
             mLastDisplayWidth = displayWidth;
         }
         mQwertyKeyboard = new LatinKeyboard(this, R.xml.qwerty);
+        mQwertyDeKeyboard = new LatinKeyboard(this, R.xml.qwerty_de);
+        mQwertyEsKeyboard = new LatinKeyboard(this, R.xml.qwerty_es);
+        mAzertyFrKeyboard = new LatinKeyboard(this, R.xml.azerty_fr);
         mQwertyGrKeyboard = new LatinKeyboard(this, R.xml.qwerty_gr);
+        mQwertyItKeyboard = new LatinKeyboard(this, R.xml.qwerty_it);
+        mQwertyPtKeyboard = new LatinKeyboard(this, R.xml.qwerty_pt);
+        mQwertyTrKeyboard = new LatinKeyboard(this, R.xml.qwerty_tr);
         mEastSlavicKeyboard = new LatinKeyboard(this, R.xml.east_slavic);
+        mArabicKeyboard = new LatinKeyboard(this, R.xml.arabic);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
         mPhoneKeyboard = new LatinKeyboard(this, R.xml.phone);
@@ -186,8 +200,22 @@ public class SoftKeyboard extends InputMethodService
         switch (subtype.getLocale()) {
             case "en_US":
                 return mQwertyKeyboard;
+            case "de_DE":
+                return mQwertyDeKeyboard;
+            case "es_ES":
+                return mQwertyEsKeyboard;
+            case "fr_FR":
+                return mAzertyFrKeyboard;
             case "el_GR":
                 return mQwertyGrKeyboard;
+            case "it_IT":
+                return mQwertyItKeyboard;
+            case "pt_PT":
+                return mQwertyPtKeyboard;
+            case "tr_TR":
+                return mQwertyTrKeyboard;
+            case "ar_001":
+                return mArabicKeyboard;
             case "ru_RU":
                 return mEastSlavicKeyboard;
             default:

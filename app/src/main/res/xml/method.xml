@@ -3,9 +3,24 @@
     android:settingsActivity="gr.crystalogic.keyboard.ui.ImePreferences">
 
     <subtype
+        android:imeSubtypeLocale="ar_001"
+        android:imeSubtypeMode="keyboard"
+        android:label="@string/label_subtype_ar" />
+
+    <subtype
         android:imeSubtypeLocale="en_US"
         android:imeSubtypeMode="keyboard"
         android:label="@string/label_subtype_en" />
+
+    <subtype
+        android:imeSubtypeLocale="fr_FR"
+        android:imeSubtypeMode="keyboard"
+        android:label="@string/label_subtype_fr" />
+
+    <subtype
+        android:imeSubtypeLocale="de_DE"
+        android:imeSubtypeMode="keyboard"
+        android:label="@string/label_subtype_de" />
 
     <subtype
         android:imeSubtypeLocale="el_GR"
@@ -13,8 +28,28 @@
         android:label="@string/label_subtype_el" />
 
     <subtype
+        android:imeSubtypeLocale="it_IT"
+        android:imeSubtypeMode="keyboard"
+        android:label="@string/label_subtype_it" />
+
+    <subtype
+        android:imeSubtypeLocale="pt_PT"
+        android:imeSubtypeMode="keyboard"
+        android:label="@string/label_subtype_pt" />
+
+    <subtype
         android:imeSubtypeLocale="ru_RU"
         android:imeSubtypeMode="keyboard"
         android:label="@string/label_subtype_ru" />
+
+    <subtype
+        android:imeSubtypeLocale="es_ES"
+        android:imeSubtypeMode="keyboard"
+        android:label="@string/label_subtype_es" />
+
+    <subtype
+        android:imeSubtypeLocale="tr_TR"
+        android:imeSubtypeMode="keyboard"
+        android:label="@string/label_subtype_tr" />
 
 </input-method>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:horizontalGap="@dimen/horizontalGap"
+    android:keyHeight="@dimen/key_height"
+    android:keyWidth="9%p"
+    android:verticalGap="@dimen/verticalGap">
+
+    <Row>
+        <Key
+            android:codes="1590"
+            android:keyEdgeFlags="left"
+            android:keyLabel="ض" />
+        <Key
+            android:codes="1589"
+            android:keyLabel="ص" />
+        <Key
+            android:codes="1579"
+            android:keyLabel="ث" />
+        <Key
+            android:codes="1602"
+            android:keyLabel="ق" />
+        <Key
+            android:codes="1601"
+            android:keyLabel="ف" />
+        <Key
+            android:codes="1594"
+            android:keyLabel="غ" />
+        <Key
+            android:codes="1593"
+            android:keyLabel="ع" />
+        <Key
+            android:codes="1607"
+            android:keyLabel="ه" />
+        <Key
+            android:codes="1582"
+            android:keyLabel="خ" />
+        <Key
+            android:codes="1581"
+            android:keyLabel="ح" />
+        <Key
+            android:codes="1580"
+            android:keyEdgeFlags="right"
+            android:keyLabel="ج" />
+    </Row>
+
+    <Row>
+        <Key
+            android:codes="1588"
+            android:keyEdgeFlags="left"
+            android:keyLabel="ش" />
+        <Key
+            android:codes="1587"
+            android:keyLabel="س" />
+        <Key
+            android:codes="1610"
+            android:keyLabel="ي" />
+        <Key
+            android:codes="1576"
+            android:keyLabel="ب" />
+        <Key
+            android:codes="1604"
+            android:keyLabel="ل" />
+        <Key
+            android:codes="1575"
+            android:keyLabel="ا" />
+        <Key
+            android:codes="1578"
+            android:keyLabel="ت" />
+        <Key
+            android:codes="1606"
+            android:keyLabel="ن" />
+        <Key
+            android:codes="1605"
+            android:keyLabel="م" />
+        <Key
+            android:codes="1603"
+            android:keyLabel="ك" />
+        <Key
+            android:codes="1591"
+            android:keyEdgeFlags="right"
+            android:keyLabel="ط" />
+    </Row>
+
+    <Row
+        android:keyWidth="9%p">
+        <Key
+            android:codes="1584"
+            android:keyLabel="ذ" />
+        <Key
+            android:codes="1569"
+            android:keyLabel="ء" />
+        <Key
+            android:codes="1572"
+            android:keyLabel="ؤ" />
+        <Key
+            android:codes="1585"
+            android:keyLabel="ر" />
+        <Key
+            android:codes="1609"
+            android:keyLabel="ى" />
+        <Key
+            android:codes="1577"
+            android:keyLabel="ة" />
+        <Key
+            android:codes="1608"
+            android:keyLabel="و" />
+        <Key
+            android:codes="1586"
+            android:keyLabel="ز" />
+        <Key
+            android:codes="1592"
+            android:keyLabel="ظ" />
+        <Key
+            android:codes="1583"
+            android:keyLabel="د" />
+        <Key
+            android:codes="@integer/key_delete"
+            android:isRepeatable="true"
+            android:keyEdgeFlags="right"
+            android:keyIcon="@drawable/ic_backspace_black38_24dp"
+            android:keyWidth="10%p" />
+    </Row>
+
+    <Row android:rowEdgeFlags="bottom">
+        <Key
+            android:codes="@integer/key_symbol"
+            android:keyEdgeFlags="left"
+            android:keyLabel="\?123"
+            android:keyWidth="14%p" />
+        <Key
+            android:codes="@integer/key_language"
+            android:keyIcon="@drawable/ic_language_black38_24dp"
+            android:keyWidth="14%p" />
+        <Key
+            android:codes="44"
+            android:keyLabel=","
+            android:keyWidth="14%p" />
+        <Key
+            android:codes="32"
+            android:isRepeatable="true"
+            android:keyIcon="@drawable/ic_space_bar_black_36dp"
+            android:keyWidth="20%p" />
+        <Key
+            android:codes="46"
+            android:keyLabel="."
+            android:keyWidth="14%p" />
+        <Key
+            android:codes="@integer/key_return"
+            android:keyEdgeFlags="right"
+            android:keyIcon="@drawable/keyboard_return"
+            android:keyWidth="24%p" />
+    </Row>
+</Keyboard>
