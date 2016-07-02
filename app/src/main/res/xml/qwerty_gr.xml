@@ -2,13 +2,16 @@
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:horizontalGap="@dimen/horizontalGap"
     android:keyHeight="@dimen/key_height"
-    android:keyWidth="11%p"
+    android:keyWidth="10%p"
     android:verticalGap="@dimen/verticalGap">
 
     <Row>
         <Key
-            android:codes="962"
+            android:codes="059"
             android:keyEdgeFlags="left"
+            android:keyLabel=";" />
+        <Key
+            android:codes="962"
             android:keyLabel="ς" />
         <Key
             android:codes="949"
@@ -48,6 +51,7 @@
     <Row>
         <Key
             android:codes="945"
+            android:horizontalGap="5%p"
             android:keyEdgeFlags="left"
             android:keyLabel="α"
             android:popupCharacters="ά"
@@ -157,4 +161,3 @@
             android:keyWidth="24%p" />
     </Row>
 </Keyboard>
-    
