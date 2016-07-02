@@ -24,7 +24,7 @@
             android:keyLabel="(" />
         <Key
             android:codes="@integer/key_shift"
-            android:keyLabel="@string/switch_2" />
+            android:keyLabel="@string/switch_3" />
     </Row>
     <Row>
         <Key
