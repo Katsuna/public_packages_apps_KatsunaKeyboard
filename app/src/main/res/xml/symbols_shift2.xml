@@ -68,11 +68,11 @@
     </Row>
     <Row>
         <Key
-            android:codes="48"
-            android:keyLabel="0" />
-        <Key
             android:codes="124"
             android:keyLabel="|" />
+        <Key
+            android:codes="48"
+            android:keyLabel="0" />
         <Key
             android:codes="215"
             android:keyLabel="×" />
