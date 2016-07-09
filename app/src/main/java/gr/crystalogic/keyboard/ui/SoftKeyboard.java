@@ -32,7 +32,7 @@ public class SoftKeyboard extends InputMethodService
     private LatinKeyboard mSymbolsShiftedKeyboard;
     private LatinKeyboard mSymbolsShifted2Keyboard;
     private LatinKeyboard mQwertyKeyboard;
-    private LatinKeyboard mQwertyDeKeyboard;
+    private LatinKeyboard mQwertzDeKeyboard;
     private LatinKeyboard mQwertyEsKeyboard;
     private LatinKeyboard mAzertyFrKeyboard;
     private LatinKeyboard mQwertyGrKeyboard;
@@ -72,7 +72,7 @@ public class SoftKeyboard extends InputMethodService
             mLastDisplayWidth = displayWidth;
         }
         mQwertyKeyboard = new LatinKeyboard(this, R.xml.qwerty);
-        mQwertyDeKeyboard = new LatinKeyboard(this, R.xml.qwerty_de);
+        mQwertzDeKeyboard = new LatinKeyboard(this, R.xml.qwertz_de);
         mQwertyEsKeyboard = new LatinKeyboard(this, R.xml.qwerty_es);
         mAzertyFrKeyboard = new LatinKeyboard(this, R.xml.azerty_fr);
         mQwertyGrKeyboard = new LatinKeyboard(this, R.xml.qwerty_gr);
@@ -218,7 +218,7 @@ public class SoftKeyboard extends InputMethodService
             case "en_US":
                 return mQwertyKeyboard;
             case "de_DE":
-                return mQwertyDeKeyboard;
+                return mQwertzDeKeyboard;
             case "es_ES":
                 return mQwertyEsKeyboard;
             case "fr_FR":

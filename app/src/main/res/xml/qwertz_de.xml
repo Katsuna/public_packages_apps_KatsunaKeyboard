@@ -25,34 +25,35 @@
             android:codes="116"
             android:keyLabel="t" />
         <Key
-            android:codes="121"
-            android:keyLabel="y" />
+            android:codes="122"
+            android:keyLabel="z" />
         <Key
             android:codes="117"
             android:keyLabel="u"
-            android:popupCharacters="&#x00FC;&#x00FB;&#x00F9;&#x00FA;&#x016B;"
-            android:popupKeyboard="@xml/kbd_popup_template"/>
+            android:popupCharacters="&#x00FB;&#x00F9;&#x00FA;&#x016B;" />
         <Key
             android:codes="105"
             android:keyLabel="i" />
         <Key
             android:codes="111"
             android:keyLabel="o"
-            android:popupCharacters="&#x00F6;&#x00F4;&#x00F2;&#x00F3;&#x00F5;&#x0153;&#x00F8;&#x014D;"
-            android:popupKeyboard="@xml/kbd_popup_template"/>
+            android:popupCharacters="&#x00F4;&#x00F2;&#x00F3;&#x00F5;&#x0153;&#x00F8;&#x014D;"
+            android:popupKeyboard="@xml/kbd_popup_template" />
         <Key
             android:codes="112"
-            android:keyEdgeFlags="right"
             android:keyLabel="p" />
+        <Key
+            android:codes="252"
+            android:keyEdgeFlags="right"
+            android:keyLabel="ü" />
     </Row>
 
     <Row>
         <Key
             android:codes="97"
-            android:horizontalGap="5%p"
             android:keyEdgeFlags="left"
             android:keyLabel="a"
-            android:popupCharacters="&#x00E4;&#x00E2;&#x00E0;&#x00E1;&#x00E6;&#x00E3;&#x00E5;&#x0101;"
+            android:popupCharacters="&#x00E2;&#x00E0;&#x00E1;&#x00E6;&#x00E3;&#x00E5;&#x0101;"
             android:popupKeyboard="@xml/kbd_popup_template"/>
         <Key
             android:codes="115"
@@ -81,6 +82,13 @@
             android:codes="108"
             android:keyEdgeFlags="right"
             android:keyLabel="l" />
+        <Key
+            android:codes="246"
+            android:keyLabel="ö" />
+        <Key
+            android:codes="228"
+            android:keyEdgeFlags="right"
+            android:keyLabel="ä" />
     </Row>
 
     <Row>
@@ -92,8 +100,8 @@
             android:keyIcon="@drawable/small_pressed_t"
             android:keyWidth="15%p" />
         <Key
-            android:codes="122"
-            android:keyLabel="z" />
+            android:codes="121"
+            android:keyLabel="y" />
         <Key
             android:codes="120"
             android:keyLabel="x" />
