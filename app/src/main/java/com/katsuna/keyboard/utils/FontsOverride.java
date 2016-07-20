@@ -1,4 +1,4 @@
-package gr.crystalogic.keyboard.utils;
+package com.katsuna.keyboard.utils;
 
 import android.content.Context;
 import android.graphics.Typeface;

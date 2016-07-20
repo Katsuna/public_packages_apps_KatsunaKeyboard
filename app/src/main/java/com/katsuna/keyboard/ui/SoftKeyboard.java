@@ -1,4 +1,4 @@
-package gr.crystalogic.keyboard.ui;
+package com.katsuna.keyboard.ui;
 
 import android.app.Dialog;
 import android.inputmethodservice.InputMethodService;
@@ -16,8 +16,8 @@ import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
-import gr.crystalogic.keyboard.R;
-import gr.crystalogic.keyboard.utils.Log;
+import com.katsuna.keyboard.R;
+import com.katsuna.keyboard.utils.Log;
 
 public class SoftKeyboard extends InputMethodService
         implements KeyboardView.OnKeyboardActionListener {

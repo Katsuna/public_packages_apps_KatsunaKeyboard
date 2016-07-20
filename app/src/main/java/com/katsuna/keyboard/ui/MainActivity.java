@@ -1,9 +1,9 @@
-package gr.crystalogic.keyboard.ui;
+package com.katsuna.keyboard.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import gr.crystalogic.keyboard.R;
+import com.katsuna.keyboard.R;
 
 public class MainActivity extends AppCompatActivity {
 

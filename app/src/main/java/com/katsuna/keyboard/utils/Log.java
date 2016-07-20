@@ -1,4 +1,4 @@
-package gr.crystalogic.keyboard.utils;
+package com.katsuna.keyboard.utils;
 
 @SuppressWarnings({"ConstantConditions", "PointlessBooleanExpression"})
 public class Log {

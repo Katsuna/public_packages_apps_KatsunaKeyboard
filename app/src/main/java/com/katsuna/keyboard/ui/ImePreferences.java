@@ -1,12 +1,11 @@
-package gr.crystalogic.keyboard.ui;
+package com.katsuna.keyboard.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
 import com.android.inputmethodcommon.InputMethodSettingsFragment;
-
-import gr.crystalogic.keyboard.R;
+import com.katsuna.keyboard.R;
 
 public class ImePreferences extends PreferenceActivity {
     @Override

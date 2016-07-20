@@ -1,6 +1,6 @@
-package gr.crystalogic.keyboard;
+package com.katsuna.keyboard;
 
-import gr.crystalogic.keyboard.utils.FontsOverride;
+import com.katsuna.keyboard.utils.FontsOverride;
 
 public final class Application extends android.app.Application {
     @Override

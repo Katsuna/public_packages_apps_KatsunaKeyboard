@@ -1,4 +1,4 @@
-package gr.crystalogic.keyboard.ui;
+package com.katsuna.keyboard.ui;
 
 import android.content.Context;
 import android.content.res.Resources;

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="gr.crystalogic.keyboard">
+    package="com.katsuna.keyboard">
 
     <application
-        android:name=".Application"
+        android:name="com.katsuna.keyboard.Application"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name="com.katsuna.keyboard.ui.MainActivity" />
 
         <activity
-            android:name=".ui.ImePreferences"
+            android:name="com.katsuna.keyboard.ui.ImePreferences"
             android:label="@string/settings_name"
             android:theme="@style/SettingsTheme">
             <intent-filter>
@@ -21,7 +21,7 @@
         </activity>
 
         <service
-            android:name=".ui.SoftKeyboard"
+            android:name="com.katsuna.keyboard.ui.SoftKeyboard"
             android:label="@string/simple_ime"
             android:permission="android.permission.BIND_INPUT_METHOD">
             <meta-data

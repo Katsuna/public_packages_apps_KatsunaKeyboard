@@ -1,11 +1,11 @@
-package gr.crystalogic.keyboard.ui;
+package com.katsuna.keyboard.ui;
 
 import android.content.Context;
 import android.inputmethodservice.KeyboardView;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 
-import gr.crystalogic.keyboard.R;
+import com.katsuna.keyboard.R;
 
 public class LatinKeyboardView extends KeyboardView {
 
