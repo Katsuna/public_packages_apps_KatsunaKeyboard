@@ -2,7 +2,7 @@
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:horizontalGap="@dimen/horizontalGap"
     android:keyHeight="@dimen/key_height"
-    android:keyWidth="10%p"
+    android:keyWidth="9%p"
     android:verticalGap="@dimen/verticalGap">
 
     <Row>
@@ -80,7 +80,6 @@
             android:keyLabel="k" />
         <Key
             android:codes="108"
-            android:keyEdgeFlags="right"
             android:keyLabel="l" />
         <Key
             android:codes="246"
