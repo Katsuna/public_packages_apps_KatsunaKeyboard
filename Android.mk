@@ -20,7 +20,7 @@ LOCAL_AAPT_FLAGS := --auto-add-overlay
 LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.appcompat
 LOCAL_AAPT_FLAGS += --extra-packages android.support.design
 
-LOCAL_PACKAGE_NAME := Keyboard 
+LOCAL_PACKAGE_NAME := KatsunaKeyboard
 LOCAL_CERTIFICATE := platform
 
 include $(BUILD_PACKAGE)
