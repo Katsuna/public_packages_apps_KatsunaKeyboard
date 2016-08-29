@@ -106,7 +106,7 @@
             android:codes="@integer/key_delete"
             android:isRepeatable="true"
             android:keyEdgeFlags="right"
-            android:keyIcon="@drawable/ic_backspace_black38_24dp"
+            android:keyIcon="@drawable/ic_backspace_grey300_24dp"
             android:keyWidth="15%p" />
     </Row>
 
@@ -114,11 +114,11 @@
         <Key
             android:codes="@integer/key_symbol"
             android:keyEdgeFlags="left"
-            android:keyLabel="\?123"
+            android:keyIcon="@drawable/k_123_10dp"
             android:keyWidth="14%p" />
         <Key
             android:codes="@integer/key_language"
-            android:keyIcon="@drawable/ic_language_black38_24dp"
+            android:keyIcon="@drawable/ic_translate_grey300_24dp"
             android:keyWidth="14%p" />
         <Key
             android:codes="44"
