@@ -13,8 +13,7 @@
 
         <activity
             android:name="com.katsuna.keyboard.ui.ImePreferences"
-            android:label="@string/settings_name"
-            android:theme="@style/SettingsTheme">
+            android:label="@string/settings_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
