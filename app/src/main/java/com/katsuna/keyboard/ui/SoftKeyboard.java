@@ -111,7 +111,8 @@ public class SoftKeyboard extends InputMethodService
             final boolean shouldSupportLanguageSwitchKey;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                 shouldSupportLanguageSwitchKey = mInputMethodManager.shouldOfferSwitchingToNextInputMethod(getToken());
-                nextKeyboard.setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
+                // always show keyboard switch popup key
+                nextKeyboard.setLanguageSwitchKeyVisibility(true);
             }
         }
         mInputView.setKeyboard(nextKeyboard);
