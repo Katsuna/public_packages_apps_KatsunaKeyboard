@@ -126,7 +126,7 @@
         <Key
             android:codes="@integer/key_symbol"
             android:keyEdgeFlags="left"
-            android:keyIcon="@drawable/k_123_10dp"
+            android:keyIcon="@drawable/k_123"
             android:keyWidth="14%p" />
         <Key
             android:codes="@integer/key_language"

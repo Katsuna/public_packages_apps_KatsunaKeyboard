@@ -1,5 +1,6 @@
 package com.katsuna.keyboard.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
@@ -93,6 +94,7 @@ public class SoftKeyboard extends InputMethodService
      * is displayed, and every time it needs to be re-created such as due to
      * a configuration change.
      */
+    @SuppressLint("InflateParams")
     @Override
     public View onCreateInputView() {
         Log.d(this, "onCreateInputView");
