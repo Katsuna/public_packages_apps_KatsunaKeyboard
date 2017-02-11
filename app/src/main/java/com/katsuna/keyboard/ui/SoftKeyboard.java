@@ -17,6 +17,8 @@ import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
+import com.katsuna.commons.entities.KeyboardEvent;
+import com.katsuna.commons.providers.KeyboardProvider;
 import com.katsuna.keyboard.R;
 import com.katsuna.keyboard.utils.Log;
 
@@ -255,17 +257,23 @@ public class SoftKeyboard extends InputMethodService
         Log.d(this, "onKey:" + primaryCode);
 
         if (primaryCode == Keyboard.KEYCODE_DELETE) {
+            saveKey(primaryCode);
             handleBackspace();
         } else if (primaryCode == Keyboard.KEYCODE_SHIFT) {
+            saveKey(primaryCode);
             handleShift();
         } else if (primaryCode == Keyboard.KEYCODE_CANCEL) {
+            saveKey(primaryCode);
             handleClose();
         } else if (primaryCode == Constants.KEYCODE_LANGUAGE_SWITCH) {
+            saveKey(primaryCode);
             handleLanguageSwitch();
         } else if (primaryCode == Keyboard.KEYCODE_DONE) {
+            saveKey(primaryCode);
             performEditorAction(mCurrentEditorInfo);
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
+            saveKey(primaryCode);
             Keyboard current = mInputView.getKeyboard();
             if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard || current == mSymbolsShifted2Keyboard) {
                 InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
@@ -277,6 +285,16 @@ public class SoftKeyboard extends InputMethodService
         } else {
             handleCharacter(primaryCode);
         }
+    }
+
+    private void saveKey(int code) {
+        KeyboardEvent event = new KeyboardEvent(code);
+        KeyboardProvider.save(this, event);
+    }
+
+    private void saveKey(int code, String character) {
+        KeyboardEvent event = new KeyboardEvent(code, character);
+        KeyboardProvider.save(this, event);
     }
 
     private void performEditorAction(EditorInfo sEditorInfo) {
@@ -360,7 +378,9 @@ public class SoftKeyboard extends InputMethodService
                 primaryCode = Character.toUpperCase(primaryCode);
             }
         }
-        getCurrentInputConnection().commitText(String.valueOf((char) primaryCode), 1);
+        String character = String.valueOf((char) primaryCode);
+        saveKey(primaryCode, character);
+        getCurrentInputConnection().commitText(character, 1);
         setAutoShift();
     }
 

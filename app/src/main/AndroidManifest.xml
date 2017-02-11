@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.katsuna.keyboard">
 
+    <uses-permission android:name="com.katsuna.services.datastore.permission.keyboard" />
+
     <application
         android:name="com.katsuna.keyboard.Application"
         android:allowBackup="false"
