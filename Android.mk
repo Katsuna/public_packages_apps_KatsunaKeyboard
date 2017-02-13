@@ -15,6 +15,10 @@ LOCAL_STATIC_JAVA_LIBRARIES := android-support-v4
 LOCAL_STATIC_JAVA_LIBRARIES += android-support-v7-appcompat
 LOCAL_STATIC_JAVA_LIBRARIES += android-support-design
 
+# Include KatsunaCommon into this app
+LOCAL_REQUIRED_MODULES := KatsunaCommon
+LOCAL_STATIC_JAVA_LIBRARIES += KatsunaCommon
+
 LOCAL_AAPT_INCLUDE_ALL_RESOURCES := true
 LOCAL_AAPT_FLAGS := --auto-add-overlay
 LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.appcompat
