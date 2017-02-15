@@ -50,6 +50,7 @@ public class SoftKeyboard extends InputMethodService
     private EditorInfo mCurrentEditorInfo;
     private boolean inputWithAutoCapsDisabled;
     private boolean autoShiftOn;
+    private boolean mPasswordField;
 
     @Override
     public void onCreate() {
@@ -167,9 +168,20 @@ public class SoftKeyboard extends InputMethodService
 
         //disable auto caps feature for password fields
         int variation = attribute.inputType & InputType.TYPE_MASK_VARIATION;
-        inputWithAutoCapsDisabled = variation == InputType.TYPE_TEXT_VARIATION_PASSWORD ||
-                variation == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD ||
-                variation == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD;
+
+        // find if input type is password
+        switch (variation) {
+            case InputType.TYPE_TEXT_VARIATION_PASSWORD:
+            case InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD:
+            case InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD:
+            case InputType.TYPE_NUMBER_VARIATION_PASSWORD:
+                mPasswordField = true;
+                break;
+            default:
+                mPasswordField = false;
+        }
+
+        inputWithAutoCapsDisabled = mPasswordField;
 
         //disable auto caps feature uri fields and email fields
         if (variation == EditorInfo.TYPE_TEXT_VARIATION_URI ||
@@ -257,23 +269,23 @@ public class SoftKeyboard extends InputMethodService
         Log.d(this, "onKey:" + primaryCode);
 
         if (primaryCode == Keyboard.KEYCODE_DELETE) {
-            saveKey(primaryCode);
+            saveKey(primaryCode, "");
             handleBackspace();
         } else if (primaryCode == Keyboard.KEYCODE_SHIFT) {
-            saveKey(primaryCode);
+            saveKey(primaryCode, "");
             handleShift();
         } else if (primaryCode == Keyboard.KEYCODE_CANCEL) {
-            saveKey(primaryCode);
+            saveKey(primaryCode, "");
             handleClose();
         } else if (primaryCode == Constants.KEYCODE_LANGUAGE_SWITCH) {
-            saveKey(primaryCode);
+            saveKey(primaryCode, "");
             handleLanguageSwitch();
         } else if (primaryCode == Keyboard.KEYCODE_DONE) {
-            saveKey(primaryCode);
+            saveKey(primaryCode, "");
             performEditorAction(mCurrentEditorInfo);
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
-            saveKey(primaryCode);
+            saveKey(primaryCode, "");
             Keyboard current = mInputView.getKeyboard();
             if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard || current == mSymbolsShifted2Keyboard) {
                 InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
@@ -287,14 +299,15 @@ public class SoftKeyboard extends InputMethodService
         }
     }
 
-    private void saveKey(int code) {
-        KeyboardEvent event = new KeyboardEvent(code);
-        KeyboardProvider.save(this, event);
-    }
-
     private void saveKey(int code, String character) {
-        KeyboardEvent event = new KeyboardEvent(code, character);
-        KeyboardProvider.save(this, event);
+        // Never store passwords!!
+        if (mPasswordField) {
+            KeyboardEvent event = new KeyboardEvent(Constants.PASSWORD_CODE, Constants.PASSWORD_WILDCARD);
+            KeyboardProvider.save(this, event);
+        } else {
+            KeyboardEvent event = new KeyboardEvent(code, character);
+            KeyboardProvider.save(this, event);
+        }
     }
 
     private void performEditorAction(EditorInfo sEditorInfo) {
