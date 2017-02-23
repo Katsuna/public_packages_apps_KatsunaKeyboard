@@ -17,8 +17,6 @@ import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
-import com.katsuna.commons.entities.KeyboardEvent;
-import com.katsuna.commons.providers.KeyboardProvider;
 import com.katsuna.keyboard.R;
 import com.katsuna.keyboard.utils.Log;
 
@@ -267,23 +265,17 @@ public class SoftKeyboard extends InputMethodService
     public void onKey(int primaryCode, int[] keyCodes) {
 
         if (primaryCode == Keyboard.KEYCODE_DELETE) {
-            saveKey(primaryCode);
             handleBackspace();
         } else if (primaryCode == Keyboard.KEYCODE_SHIFT) {
-            saveKey(primaryCode);
             handleShift();
         } else if (primaryCode == Keyboard.KEYCODE_CANCEL) {
-            saveKey(primaryCode);
             handleClose();
         } else if (primaryCode == Constants.KEYCODE_LANGUAGE_SWITCH) {
-            saveKey(primaryCode);
             handleLanguageSwitch();
         } else if (primaryCode == Keyboard.KEYCODE_DONE) {
-            saveKey(primaryCode);
             performEditorAction(mCurrentEditorInfo);
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
-            saveKey(primaryCode);
             Keyboard current = mInputView.getKeyboard();
             if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard || current == mSymbolsShifted2Keyboard) {
                 InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
@@ -294,27 +286,6 @@ public class SoftKeyboard extends InputMethodService
             }
         } else {
             handleCharacter(primaryCode);
-        }
-    }
-
-    private void saveKey(int code) {
-        // Never store passwords!!
-        if (!mPasswordField) {
-            KeyboardEvent event = new KeyboardEvent(code);
-            KeyboardProvider.save(this, event);
-        }
-    }
-
-    private int getCharacterCategory(String input) {
-        String numberRegex = "\\d";
-        String letterRegex = "\\p{L}";
-
-        if (input.matches(numberRegex)) {
-            return Constants.KEY_NUMBER;
-        } else if (input.matches(letterRegex)) {
-            return Constants.KEY_LETTER;
-        } else {
-            return Constants.KEY_OTHER;
         }
     }
 
@@ -400,8 +371,6 @@ public class SoftKeyboard extends InputMethodService
             }
         }
         String character = String.valueOf((char) primaryCode);
-        primaryCode = getCharacterCategory(character);
-        saveKey(primaryCode);
         getCurrentInputConnection().commitText(character, 1);
         setAutoShift();
     }
