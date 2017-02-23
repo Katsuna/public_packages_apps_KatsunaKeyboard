@@ -266,26 +266,24 @@ public class SoftKeyboard extends InputMethodService
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
 
-        Log.d(this, "onKey:" + primaryCode);
-
         if (primaryCode == Keyboard.KEYCODE_DELETE) {
-            saveKey(primaryCode, "");
+            saveKey(primaryCode);
             handleBackspace();
         } else if (primaryCode == Keyboard.KEYCODE_SHIFT) {
-            saveKey(primaryCode, "");
+            saveKey(primaryCode);
             handleShift();
         } else if (primaryCode == Keyboard.KEYCODE_CANCEL) {
-            saveKey(primaryCode, "");
+            saveKey(primaryCode);
             handleClose();
         } else if (primaryCode == Constants.KEYCODE_LANGUAGE_SWITCH) {
-            saveKey(primaryCode, "");
+            saveKey(primaryCode);
             handleLanguageSwitch();
         } else if (primaryCode == Keyboard.KEYCODE_DONE) {
-            saveKey(primaryCode, "");
+            saveKey(primaryCode);
             performEditorAction(mCurrentEditorInfo);
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
-            saveKey(primaryCode, "");
+            saveKey(primaryCode);
             Keyboard current = mInputView.getKeyboard();
             if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard || current == mSymbolsShifted2Keyboard) {
                 InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
@@ -299,14 +297,24 @@ public class SoftKeyboard extends InputMethodService
         }
     }
 
-    private void saveKey(int code, String character) {
+    private void saveKey(int code) {
         // Never store passwords!!
-        if (mPasswordField) {
-            KeyboardEvent event = new KeyboardEvent(Constants.PASSWORD_CODE, Constants.PASSWORD_WILDCARD);
+        if (!mPasswordField) {
+            KeyboardEvent event = new KeyboardEvent(code);
             KeyboardProvider.save(this, event);
+        }
+    }
+
+    private int getCharacterCategory(String input) {
+        String numberRegex = "\\d";
+        String letterRegex = "\\p{L}";
+
+        if (input.matches(numberRegex)) {
+            return Constants.KEY_NUMBER;
+        } else if (input.matches(letterRegex)) {
+            return Constants.KEY_LETTER;
         } else {
-            KeyboardEvent event = new KeyboardEvent(code, character);
-            KeyboardProvider.save(this, event);
+            return Constants.KEY_OTHER;
         }
     }
 
@@ -392,7 +400,8 @@ public class SoftKeyboard extends InputMethodService
             }
         }
         String character = String.valueOf((char) primaryCode);
-        saveKey(primaryCode, character);
+        primaryCode = getCharacterCategory(character);
+        saveKey(primaryCode);
         getCurrentInputConnection().commitText(character, 1);
         setAutoShift();
     }
