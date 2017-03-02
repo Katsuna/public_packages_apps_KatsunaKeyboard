@@ -1,4 +1,5 @@
 LOCAL_PATH := $(call my-dir)
+KATSUNA_COMMON_PATH := $(ANDROID_BUILD_TOP)/frameworks/KatsunaCommon
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_TAGS := optional
@@ -6,6 +7,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := $(call all-java-files-under, app/src/main)
 
 LOCAL_MANIFEST_FILE := app/src/main/AndroidManifest.xml
+LOCAL_FULL_LIBS_MANIFEST_FILES := $(KATSUNA_COMMON_PATH)/commons/src/main/AndroidManifest.xml
 LOCAL_ASSET_DIR := $(LOCAL_PATH)/app/src/main/assets
 LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/app/src/main/res
 LOCAL_RESOURCE_DIR += frameworks/support/v7/appcompat/res
@@ -18,9 +20,13 @@ LOCAL_STATIC_JAVA_LIBRARIES += android-support-design
 # Include KatsunaCommon into this app
 LOCAL_REQUIRED_MODULES := KatsunaCommon
 LOCAL_STATIC_JAVA_LIBRARIES += KatsunaCommon
+# Include KatsunaCommon resources
+LOCAL_RESOURCE_DIR += frameworks/KatsunaCommon/commons/src/main/res
 
 LOCAL_AAPT_INCLUDE_ALL_RESOURCES := true
 LOCAL_AAPT_FLAGS := --auto-add-overlay
+LOCAL_AAPT_FLAGS += --generate-dependencies
+LOCAL_AAPT_FLAGS += --extra-packages com.katsuna.commons
 LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.appcompat
 LOCAL_AAPT_FLAGS += --extra-packages android.support.design
 
@@ -28,5 +34,3 @@ LOCAL_PACKAGE_NAME := KatsunaKeyboard
 LOCAL_CERTIFICATE := platform
 
 include $(BUILD_PACKAGE)
-
-include $(call all-makefiles-under,$(LOCAL_PATH))
