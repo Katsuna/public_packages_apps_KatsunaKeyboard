@@ -22,7 +22,4 @@
   <string name="phoneField">Πεδίο τηλεφώνου</string>
   <string name="passwordField">Πεδίο κωδικού πρόσβασης</string>
   <string name="close_popup_keyboard">Κλείσιμο αναδυόμενου πληκτρολογίου</string>
-  <string name="switch_1">"&amp; \\?"</string>
-  <string name="switch_2">"+=("</string>
-  <string name="switch_3">".?!"</string>
 </resources>

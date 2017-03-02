@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Theme">
+
+        <!-- Default background dim amount when a menu, dialog, or something similar pops up. -->
+        <attr name="backgroundDimAmount" format="float" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="KeyboardViewPreviewState">
+        <!-- State for {@link android.inputmethodservice.KeyboardView KeyboardView}
+                key preview background. -->
+        <attr name="state_long_pressable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="KatsunaKeyboardView">
+        <!-- Default KeyboardView style. -->
+        <attr name="keyboardViewStyle" format="reference" />
+
+        <!-- Image for the key. This image needs to be a StateListDrawable, with the following
+             possible states: normal, pressed, checkable, checkable+pressed, checkable+checked,
+             checkable+checked+pressed. -->
+        <attr name="keyBackground" format="reference" />
+
+        <!-- Size of the text for character keys. -->
+        <attr name="keyTextSize" format="dimension" />
+
+        <!-- Size of the text for custom keys with some text and no icon. -->
+        <attr name="labelTextSize" format="dimension" />
+
+        <!-- Color to use for the label in a key. -->
+        <attr name="keyTextColor" format="color" />
+
+        <!-- Layout resource for key press feedback.-->
+        <attr name="keyPreviewLayout" format="reference" />
+
+        <!-- Vertical offset of the key press feedback from the key. -->
+        <attr name="keyPreviewOffset" format="dimension" />
+
+        <!-- Height of the key press feedback popup. -->
+        <attr name="keyPreviewHeight" format="dimension" />
+
+        <!-- Amount to offset the touch Y coordinate by, for bias correction. -->
+        <attr name="verticalCorrection" format="dimension" />
+
+        <!-- Layout resource for popup keyboards. -->
+        <attr name="popupLayout" format="reference" />
+
+        <!-- Place a blurred shadow of text underneath the text, drawn with the
+         specified color. The text shadow produced does not interact with
+         properties on View that are responsible for real time shadows,
+         {@link android.R.styleable#View_elevation elevation} and
+         {@link android.R.styleable#View_translationZ translationZ}. -->
+        <attr name="shadowColor" format="color" />
+        <!-- Blur radius of the text shadow. -->
+        <attr name="shadowRadius" format="float" />
+    </declare-styleable>
+
+</resources>

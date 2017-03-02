@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:bottom="@dimen/background_margin"
+        android:left="@dimen/background_margin"
+        android:right="@dimen/background_margin"
+        android:top="@dimen/background_margin">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/grey300" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+
+</layer-list>

@@ -6,6 +6,8 @@ import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 
+import com.katsuna.keyboard.Constants;
+
 class LatinKeyboard extends Keyboard {
 
     /**

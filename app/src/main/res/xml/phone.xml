@@ -55,7 +55,7 @@
         <Key
             android:codes="@integer/key_delete"
             android:keyEdgeFlags="right"
-            android:keyIcon="@drawable/ic_backspace_grey300_24dp"
+            android:keyIcon="@drawable/ic_backspace_black_24dp"
             android:keyWidth="16%p" />
     </Row>
 
@@ -71,7 +71,7 @@
             android:keyLabel="0" />
         <Key
             android:codes="32"
-            android:keyIcon="@drawable/ic_space_bar_black_36dp" />
+            android:keyLabel="@string/space" />
         <Key
             android:codes="@integer/key_return"
             android:keyEdgeFlags="right"

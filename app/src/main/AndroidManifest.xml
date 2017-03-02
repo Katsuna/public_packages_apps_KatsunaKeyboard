@@ -3,7 +3,6 @@
     package="com.katsuna.keyboard">
 
     <application
-        android:name="com.katsuna.keyboard.Application"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

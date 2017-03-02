@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
 import android.os.IBinder;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -17,11 +16,13 @@ import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
+import com.android.inputmethodservice.KatsunaKeyboardView;
+import com.katsuna.keyboard.Constants;
 import com.katsuna.keyboard.R;
 import com.katsuna.keyboard.utils.Log;
 
 public class SoftKeyboard extends InputMethodService
-        implements KeyboardView.OnKeyboardActionListener {
+        implements KatsunaKeyboardView.OnKeyboardActionListener {
 
     private InputMethodManager mInputMethodManager;
 
@@ -31,7 +32,6 @@ public class SoftKeyboard extends InputMethodService
 
     private LatinKeyboard mSymbolsKeyboard;
     private LatinKeyboard mSymbolsShiftedKeyboard;
-    private LatinKeyboard mSymbolsShifted2Keyboard;
     private LatinKeyboard mQwertyKeyboard;
     private LatinKeyboard mQwertzDeKeyboard;
     private LatinKeyboard mQwertyEsKeyboard;
@@ -85,7 +85,6 @@ public class SoftKeyboard extends InputMethodService
         mArabicKeyboard = new LatinKeyboard(this, R.xml.arabic);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
-        mSymbolsShifted2Keyboard = new LatinKeyboard(this, R.xml.symbols_shift2);
         mPhoneKeyboard = new LatinKeyboard(this, R.xml.phone);
     }
 
@@ -277,7 +276,7 @@ public class SoftKeyboard extends InputMethodService
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
             Keyboard current = mInputView.getKeyboard();
-            if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard || current == mSymbolsShifted2Keyboard) {
+            if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) {
                 InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
                 setLatinKeyboard(getKeyboard(subtype));
             } else {
@@ -354,10 +353,6 @@ public class SoftKeyboard extends InputMethodService
             mInputView.setShiftKey(true, false);
         } else if (currentKeyboard == mSymbolsShiftedKeyboard) {
             mInputView.setShiftKey(false, false);
-            setLatinKeyboard(mSymbolsShifted2Keyboard);
-            mInputView.setShiftKey(false, false);
-        } else if (currentKeyboard == mSymbolsShifted2Keyboard) {
-            mInputView.setShiftKey(false, false);
             setLatinKeyboard(mSymbolsKeyboard);
             mInputView.setShiftKey(false, false);
         }
@@ -400,7 +395,7 @@ public class SoftKeyboard extends InputMethodService
     }
 
     private boolean isQwertyKeyboard(Keyboard keyboard) {
-        return mSymbolsKeyboard != keyboard && mSymbolsShiftedKeyboard != keyboard && mSymbolsShifted2Keyboard != keyboard;
+        return mSymbolsKeyboard != keyboard && mSymbolsShiftedKeyboard != keyboard;
     }
 
     private boolean setNextCharToCapital() {
