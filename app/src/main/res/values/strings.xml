@@ -33,6 +33,9 @@
     <string name="space">space</string>
     <string name="numbers">"?123"</string>
 
+    <string name="preference_grid_key" translatable="false">preference_grid_key</string>
+    <string name="preference_grid_title">Grid background</string>
+    <string name="preference_grid_summary">Show grid background</string>
 
     <!-- KeyboardView - accessibility support -->
     <!-- Description of the Alt button in a KeyboardView. [CHAR LIMIT=NONE] -->

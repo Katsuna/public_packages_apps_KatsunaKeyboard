@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_name">
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/preference_grid_key"
+        android:summary="@string/preference_grid_summary"
+        android:title="@string/preference_grid_title" />
+
 </PreferenceScreen>

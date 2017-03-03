@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.katsuna.keyboard.ui.LatinKeyboardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BackgroundStyleGrey50"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    app:keyBackground="@drawable/keybackground_grid"
+    app:keyPreviewLayout="@null"
+    app:keyTextColor="@color/common_black"
+    app:labelTextSize="16sp"
+    app:keyTextSize="@dimen/keyTextSize"
+    app:popupLayout="@layout/popup_keyboard"
+    app:shadowRadius="0" />

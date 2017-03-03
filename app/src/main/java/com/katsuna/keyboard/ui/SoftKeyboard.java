@@ -2,9 +2,11 @@ package com.katsuna.keyboard.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,8 +23,9 @@ import com.katsuna.keyboard.Constants;
 import com.katsuna.keyboard.R;
 import com.katsuna.keyboard.utils.Log;
 
-public class SoftKeyboard extends InputMethodService
-        implements KatsunaKeyboardView.OnKeyboardActionListener {
+public class SoftKeyboard extends InputMethodService implements
+        KatsunaKeyboardView.OnKeyboardActionListener,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private InputMethodManager mInputMethodManager;
 
@@ -54,6 +57,9 @@ public class SoftKeyboard extends InputMethodService
     public void onCreate() {
         super.onCreate();
         mInputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(this);
     }
 
     /**
@@ -99,13 +105,27 @@ public class SoftKeyboard extends InputMethodService
     public View onCreateInputView() {
         Log.d(this, "onCreateInputView");
 
-        mInputView = (LatinKeyboardView) getLayoutInflater().inflate(R.layout.input, null);
+        initializeInputView();
+
+        return mInputView;
+    }
+
+    private void initializeInputView() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean gridOn = prefs.getBoolean(getResources().getString(R.string.preference_grid_key),
+                true);
+
+        if (gridOn) {
+            mInputView = (LatinKeyboardView) getLayoutInflater().inflate(R.layout.input_grid, null);
+        } else {
+            mInputView = (LatinKeyboardView) getLayoutInflater().inflate(R.layout.input, null);
+        }
+
         mInputView.setOnKeyboardActionListener(this);
 
         //mCurrentQwertyKeyboard
         InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
         setLatinKeyboard(getKeyboard(subtype));
-        return mInputView;
     }
 
     private void setLatinKeyboard(LatinKeyboard nextKeyboard) {
@@ -467,6 +487,19 @@ public class SoftKeyboard extends InputMethodService
 
     @Override
     public void onRelease(int primaryCode) {
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Log.d(this, "onSharedPreferenceChanged");
+        onConfigurationChanged(getResources().getConfiguration());
+    }
+
+    @Override
+    public void onDestroy() {
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
     }
 }
 
