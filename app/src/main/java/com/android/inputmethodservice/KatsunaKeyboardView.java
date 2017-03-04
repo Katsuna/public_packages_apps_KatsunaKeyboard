@@ -668,13 +668,18 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
             String label = key.label == null ? null : adjustCase(key.label).toString();
 
             if (label != null) {
-                // For characters, use large font. For labels like "Done", use small font.
-                if (label.length() > 1 && key.codes.length < 2) {
-                    paint.setTextSize(mLabelTextSize);
+                if (isNumeric(label)) {
+                    paint.setTextSize(mKeyTextSize);
                     paint.setTypeface(Typeface.DEFAULT_BOLD);
                 } else {
-                    paint.setTextSize(mKeyTextSize);
-                    paint.setTypeface(Typeface.DEFAULT);
+                    // For characters, use large font. For labels like "Done", use small font.
+                    if (label.length() > 1 && key.codes.length < 2) {
+                        paint.setTextSize(mLabelTextSize);
+                        paint.setTypeface(Typeface.DEFAULT_BOLD);
+                    } else {
+                        paint.setTextSize(mKeyTextSize);
+                        paint.setTypeface(Typeface.DEFAULT);
+                    }
                 }
                 // Draw a drop shadow for the text
                 paint.setShadowLayer(mShadowRadius, 0, 0, mShadowColor);
@@ -723,6 +728,10 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
 
         mDrawPending = false;
         mDirtyRect.setEmpty();
+    }
+
+    private boolean isNumeric(String text) {
+        return (text != null && text.matches("\\d+"));
     }
 
     private Drawable getBackgroundDrawable(Keyboard.Key key) {
