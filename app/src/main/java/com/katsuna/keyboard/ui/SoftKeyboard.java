@@ -113,7 +113,7 @@ public class SoftKeyboard extends InputMethodService implements
     private void initializeInputView() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean gridOn = prefs.getBoolean(getResources().getString(R.string.preference_grid_key),
-                true);
+                false);
 
         if (gridOn) {
             mInputView = (LatinKeyboardView) getLayoutInflater().inflate(R.layout.input_grid, null);
