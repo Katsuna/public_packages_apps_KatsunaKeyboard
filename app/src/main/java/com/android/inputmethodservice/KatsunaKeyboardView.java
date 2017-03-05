@@ -986,7 +986,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
         if (mAccessibilityManager.isEnabled()) {
             AccessibilityEvent event = AccessibilityEvent.obtain(eventType);
             onInitializeAccessibilityEvent(event);
-            String text = null;
+            String text;
             // This is very efficient since the properties are cached.
             final boolean speakPassword = Settings.Secure.getInt(
                     mContext.getContentResolver(), Settings.Secure.ACCESSIBILITY_SPEAK_PASSWORD, 0)
@@ -1209,7 +1209,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
         // deal with the typical multi-pointer behavior of two-thumb typing
         final int pointerCount = me.getPointerCount();
         final int action = me.getAction();
-        boolean result = false;
+        boolean result;
         final long now = me.getEventTime();
 
         if (pointerCount != mOldPointerCount) {
