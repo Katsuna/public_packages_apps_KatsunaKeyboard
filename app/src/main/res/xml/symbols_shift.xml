@@ -126,7 +126,6 @@
             android:keyLabel="." />
         <Key
             android:codes="@integer/key_return"
-            android:keyIcon="@drawable/keyboard_return"
             android:keyWidth="21.35%p" />
     </Row>
 

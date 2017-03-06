@@ -19,13 +19,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import com.android.inputmethodservice.KatsunaKeyboardView;
+import com.katsuna.commons.entities.UserProfile;
+import com.katsuna.commons.entities.UserProfileContainer;
+import com.katsuna.commons.utils.ProfileReader;
 import com.katsuna.keyboard.Constants;
 import com.katsuna.keyboard.R;
+import com.katsuna.keyboard.ui.interfaces.ProfileInfoProvider;
 import com.katsuna.keyboard.utils.Log;
 
 public class SoftKeyboard extends InputMethodService implements
         KatsunaKeyboardView.OnKeyboardActionListener,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        ProfileInfoProvider {
 
     private InputMethodManager mInputMethodManager;
 
@@ -52,6 +57,8 @@ public class SoftKeyboard extends InputMethodService implements
     private boolean inputWithAutoCapsDisabled;
     private boolean autoShiftOn;
     private boolean mPasswordField;
+    private UserProfileContainer mUserProfileContainer;
+    private boolean mUserProfileChanged;
 
     @Override
     public void onCreate() {
@@ -122,6 +129,7 @@ public class SoftKeyboard extends InputMethodService implements
         }
 
         mInputView.setOnKeyboardActionListener(this);
+        mInputView.setProfileInfoProvider(this);
 
         //mCurrentQwertyKeyboard
         InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
@@ -147,6 +155,8 @@ public class SoftKeyboard extends InputMethodService implements
         Log.d(this, "onStartInput");
 
         super.onStartInput(attribute, restarting);
+
+        loadProfile();
 
         // We are now going to initialize our state based on the type of
         // text being edited.
@@ -500,6 +510,26 @@ public class SoftKeyboard extends InputMethodService implements
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.unregisterOnSharedPreferenceChangeListener(this);
         super.onDestroy();
+    }
+
+    private void loadProfile() {
+        Log.d(this, "loading Profile ...");
+        UserProfileContainer userProfileContainer = ProfileReader.getKatsunaUserProfile(this);
+        setUserProfile(userProfileContainer);
+    }
+
+    @Override
+    public UserProfile getUserProfile() {
+        return mUserProfileContainer.getActiveUserProfile();
+    }
+
+    private void setUserProfile(UserProfileContainer userProfileContainer) {
+        if (userProfileContainer.equals(mUserProfileContainer)) {
+            mUserProfileChanged = false;
+        } else {
+            mUserProfileContainer = userProfileContainer;
+            mUserProfileChanged = true;
+        }
     }
 }
 

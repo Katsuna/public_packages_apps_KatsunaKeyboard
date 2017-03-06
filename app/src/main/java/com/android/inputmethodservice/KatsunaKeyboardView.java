@@ -17,6 +17,7 @@ package com.android.inputmethodservice;
  */
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -27,11 +28,15 @@ import android.graphics.Rect;
 import android.graphics.Region.Op;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.Keyboard.Key;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -48,8 +53,12 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.katsuna.commons.entities.ColorProfileKey;
+import com.katsuna.commons.entities.UserProfile;
+import com.katsuna.commons.utils.ColorCalc;
 import com.katsuna.keyboard.Constants;
 import com.katsuna.keyboard.R;
+import com.katsuna.keyboard.ui.interfaces.ProfileInfoProvider;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -198,6 +207,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
      */
     private boolean mHeadsetRequiredToHearPasswordsAnnounced;
     private Context mContext;
+    private ProfileInfoProvider mProfileInfoProvider;
 
     public KatsunaKeyboardView(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.keyboardViewStyle);
@@ -293,7 +303,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
         mPaint.setAlpha(255);
 
         mPadding = new Rect(0, 0, 0, 0);
-        mMiniKeyboardCache = new HashMap<Key, View>();
+        mMiniKeyboardCache = new HashMap<>();
         mKeyBackground.getPadding(mPadding);
 
         mSwipeThreshold = (int) (500 * getResources().getDisplayMetrics().density);
@@ -471,10 +481,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
      * @see KeyboardView#setShifted(boolean)
      */
     public boolean isShifted() {
-        if (mKeyboard != null) {
-            return mKeyboard.isShifted();
-        }
-        return false;
+        return mKeyboard != null && mKeyboard.isShifted();
     }
 
     /**
@@ -747,12 +754,71 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
                 break;
             case Constants.KEYCODE_RETURN:
                 output = null;
+                key.icon = getReturnKeyBackground();
                 break;
             default:
                 output = mKeyBackground;
                 break;
         }
+
+        // numbers background for grid layout is accent color 1.
+        if (key.label != null) {
+            String label = key.label.toString();
+            if (isNumeric(label)) {
+                SharedPreferences prefs = PreferenceManager
+                        .getDefaultSharedPreferences(getContext());
+                boolean gridOn = prefs.getBoolean(
+                        getResources().getString(R.string.preference_grid_key), false);
+
+                if (gridOn) {
+                    output = getGridBackgroundForNumbers();
+                }
+            }
+        }
+
         return output;
+    }
+
+    public void setProfileInfoProvider(ProfileInfoProvider profileInfoProvider) {
+        mProfileInfoProvider = profileInfoProvider;
+    }
+
+    private Drawable getReturnKeyBackground() {
+        GradientDrawable circle = (GradientDrawable) ContextCompat.getDrawable(mContext,
+                R.drawable.circle);
+        int accentColor1 = getAccentColor1();
+        circle.setColor(accentColor1);
+
+        Drawable arrow = ContextCompat.getDrawable(mContext,
+                R.drawable.ic_keyboard_return_black_24dp);
+
+        Drawable[] layers = {circle, arrow};
+        LayerDrawable layerDrawable = new LayerDrawable(layers);
+
+        int bgInset = getResources().getDimensionPixelSize(R.dimen.background_margin);
+        int iconInset = getResources().getDimensionPixelSize(R.dimen.icon_inset);
+        layerDrawable.setLayerInset(0, bgInset, bgInset, bgInset, bgInset);
+        layerDrawable.setLayerInset(1, iconInset, iconInset, iconInset, iconInset);
+
+        return layerDrawable;
+    }
+
+    private StateListDrawable getGridBackgroundForNumbers() {
+        StateListDrawable res = new StateListDrawable();
+
+        GradientDrawable dr = (GradientDrawable) ContextCompat.getDrawable(getContext(),
+                R.drawable.normal_grid);
+        dr.setColor(getAccentColor1());
+
+        //res.addState(new int[]{android.R.attr.state_pressed}, dr);
+        res.addState(new int[]{}, dr);
+        return res;
+    }
+
+    private int getAccentColor1() {
+        UserProfile profile = mProfileInfoProvider.getUserProfile();
+        return ColorCalc.getColor(getContext(), ColorProfileKey.ACCENT1_COLOR,
+                profile.colorProfile);
     }
 
     private void setBackgroundDrawableState(Drawable drawable, Keyboard.Key key) {

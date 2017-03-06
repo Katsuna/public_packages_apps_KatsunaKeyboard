@@ -9,4 +9,6 @@
     <dimen name="keyTextSize">24sp</dimen>
 
     <dimen name="background_margin">6dp</dimen>
+
+    <dimen name="icon_inset">20dp</dimen>
 </resources>

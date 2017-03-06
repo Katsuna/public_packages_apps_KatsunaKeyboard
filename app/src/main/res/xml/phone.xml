@@ -35,9 +35,9 @@
             android:codes="54"
             android:keyLabel="6" />
         <Key
-            android:codes="46"
+            android:codes="35"
             android:keyEdgeFlags="right"
-            android:keyLabel="."
+            android:keyLabel="#"
             android:keyWidth="16%p" />
     </Row>
 
@@ -75,7 +75,6 @@
         <Key
             android:codes="@integer/key_return"
             android:keyEdgeFlags="right"
-            android:keyIcon="@drawable/keyboard_return"
             android:keyWidth="16%p" />
     </Row>
 
