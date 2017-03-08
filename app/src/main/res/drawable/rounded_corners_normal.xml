@@ -7,7 +7,7 @@
         android:right="@dimen/background_margin"
         android:top="@dimen/background_margin">
         <shape android:shape="rectangle">
-            <solid android:color="@color/grey300" />
+            <solid android:color="@color/common_grey300" />
             <corners android:radius="14dp" />
         </shape>
     </item>

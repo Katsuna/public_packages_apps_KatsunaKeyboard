@@ -1,5 +1,5 @@
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:horizontalGap="4dp"
+    android:horizontalGap="0dp"
     android:keyHeight="@dimen/key_height"
     android:keyWidth="10%p"
-    android:verticalGap="0px" />
+    android:verticalGap="0dp" />

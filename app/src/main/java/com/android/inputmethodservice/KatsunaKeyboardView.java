@@ -757,7 +757,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
                 key.icon = getReturnKeyBackground();
                 break;
             default:
-                output = mKeyBackground;
+                output = getMainBackground();
                 break;
         }
 
@@ -803,14 +803,40 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
         return layerDrawable;
     }
 
+    private StateListDrawable getMainBackground() {
+
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(getContext());
+        boolean gridOn = prefs.getBoolean(
+                getResources().getString(R.string.preference_grid_key), false);
+
+        int normalDrawable = R.drawable.normal;
+        int pressedDrawable = R.drawable.normal_pressed;
+        if (gridOn) {
+            normalDrawable = R.drawable.normal_grid;
+            pressedDrawable = R.drawable.normal_grid_pressed;
+        }
+
+        StateListDrawable res = new StateListDrawable();
+
+        GradientDrawable drPressed = (GradientDrawable) ContextCompat.getDrawable(getContext(),
+                pressedDrawable);
+        drPressed.setColor(getAccentColor1());
+
+        Drawable dr = ContextCompat.getDrawable(getContext(), normalDrawable);
+
+        res.addState(new int[]{android.R.attr.state_pressed}, drPressed);
+        res.addState(new int[]{}, dr);
+        return res;
+    }
+
     private StateListDrawable getGridBackgroundForNumbers() {
         StateListDrawable res = new StateListDrawable();
 
         GradientDrawable dr = (GradientDrawable) ContextCompat.getDrawable(getContext(),
-                R.drawable.normal_grid);
+                R.drawable.numeric_grid);
         dr.setColor(getAccentColor1());
 
-        //res.addState(new int[]{android.R.attr.state_pressed}, dr);
         res.addState(new int[]{}, dr);
         return res;
     }
@@ -1174,7 +1200,20 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
                 mMiniKeyboard = (KatsunaKeyboardView) mMiniKeyboardContainer
                         .findViewById(R.id.keyboardView);
                 View closeButton = mMiniKeyboardContainer.findViewById(R.id.closeButton);
-                if (closeButton != null) closeButton.setOnClickListener(this);
+                if (closeButton != null) {
+                    closeButton.setOnClickListener(this);
+
+                    SharedPreferences prefs = PreferenceManager
+                            .getDefaultSharedPreferences(getContext());
+                    boolean gridOn = prefs.getBoolean(getResources().getString(
+                            R.string.preference_grid_key), false);
+
+                    if (gridOn) {
+                        int bgColor = ContextCompat.getColor(getContext(), R.color.common_grey100);
+                        closeButton.setBackgroundColor(bgColor);
+                    }
+                }
+
                 mMiniKeyboard.setOnKeyboardActionListener(new OnKeyboardActionListener() {
                     public void onKey(int primaryCode, int[] keyCodes) {
                         mKeyboardActionListener.onKey(primaryCode, keyCodes);
@@ -1206,6 +1245,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
                         mKeyboardActionListener.onRelease(primaryCode);
                     }
                 });
+                mMiniKeyboard.setProfileInfoProvider(mProfileInfoProvider);
                 //mInputView.setSuggest(mSuggest);
                 Keyboard keyboard;
                 if (popupKey.popupCharacters != null) {
