@@ -4,6 +4,9 @@
 
     <uses-permission android:name="com.katsuna.services.datastore.permission.preferences" />
 
+    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:targetSdkVersion="8" />
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
