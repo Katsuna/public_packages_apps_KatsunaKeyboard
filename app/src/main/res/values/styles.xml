@@ -3,11 +3,11 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
 
     <style name="BackgroundStyle">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/common_white</item>
     </style>
 
-    <style name="BackgroundStyleGrey50">
-        <item name="android:background">@color/grey50</item>
+    <style name="BackgroundStyleGrey100">
+        <item name="android:background">@color/common_grey100</item>
     </style>
 
 </resources>
