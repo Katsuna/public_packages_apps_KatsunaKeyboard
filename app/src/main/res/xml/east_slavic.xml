@@ -82,14 +82,14 @@
     </Row>
 
     <Row
-        android:keyWidth="9%p">
+        android:keyWidth="8.44%p">
         <Key
             android:codes="@integer/key_shift"
             android:isModifier="true"
             android:isSticky="true"
             android:keyEdgeFlags="left"
             android:keyIcon="@drawable/small_pressed_t"
-            android:keyWidth="15%p" />
+            android:keyWidth="12%p" />
         <Key
             android:codes="1103"
             android:keyLabel="я" />
@@ -122,7 +122,7 @@
             android:isRepeatable="true"
             android:keyEdgeFlags="right"
             android:keyIcon="@drawable/ic_backspace_black_24dp"
-            android:keyWidth="15%p" />
+            android:keyWidth="12%p" />
     </Row>
     <Row android:rowEdgeFlags="bottom">
         <Key
