@@ -29,6 +29,7 @@
 
     <string name="switch_1" translatable="false">"@*?"</string>
     <string name="switch_2" translatable="false">"+=€"</string>
+    <string name="switch_3" translatable="false">"+=$"</string>
 
     <string name="space">space</string>
     <string name="numbers">"?123"</string>

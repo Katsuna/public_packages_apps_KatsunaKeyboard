@@ -39,18 +39,31 @@ public class SoftKeyboard extends InputMethodService implements
     private int mLastDisplayWidth;
 
     private LatinKeyboard mSymbolsKeyboard;
+    private LatinKeyboard mSymbolsLeftKeyboard;
     private LatinKeyboard mSymbolsShiftedKeyboard;
+    private LatinKeyboard mSymbolsShiftedLeftKeyboard;
     private LatinKeyboard mQwertyKeyboard;
+    private LatinKeyboard mQwertyLeftKeyboard;
     private LatinKeyboard mQwertzDeKeyboard;
+    private LatinKeyboard mQwertzDeLeftKeyboard;
     private LatinKeyboard mQwertyEsKeyboard;
+    private LatinKeyboard mQwertyEsLeftKeyboard;
     private LatinKeyboard mAzertyFrKeyboard;
+    private LatinKeyboard mAzertyFrLeftKeyboard;
     private LatinKeyboard mQwertyGrKeyboard;
+    private LatinKeyboard mQwertyGrLeftKeyboard;
     private LatinKeyboard mQwertyItKeyboard;
+    private LatinKeyboard mQwertyItLeftKeyboard;
     private LatinKeyboard mQwertyPtKeyboard;
+    private LatinKeyboard mQwertyPtLeftKeyboard;
     private LatinKeyboard mQwertyTrKeyboard;
+    private LatinKeyboard mQwertyTrLeftKeyboard;
     private LatinKeyboard mEastSlavicKeyboard;
+    private LatinKeyboard mEastSlavicLeftKeyboard;
     private LatinKeyboard mArabicKeyboard;
+    private LatinKeyboard mArabicLeftKeyboard;
     private LatinKeyboard mPhoneKeyboard;
+    private LatinKeyboard mPhoneLeftKeyboard;
 
     private LatinKeyboard mCurKeyboard;
     private EditorInfo mCurrentEditorInfo;
@@ -87,18 +100,71 @@ public class SoftKeyboard extends InputMethodService implements
             mLastDisplayWidth = displayWidth;
         }
         mQwertyKeyboard = new LatinKeyboard(this, R.xml.qwerty);
+        mQwertyLeftKeyboard = new LatinKeyboard(this, R.xml.qwerty_left);
         mQwertzDeKeyboard = new LatinKeyboard(this, R.xml.qwertz_de);
+        mQwertzDeLeftKeyboard = new LatinKeyboard(this, R.xml.qwertz_de_left);
         mQwertyEsKeyboard = new LatinKeyboard(this, R.xml.qwerty_es);
+        mQwertyEsLeftKeyboard = new LatinKeyboard(this, R.xml.qwerty_es_left);
         mAzertyFrKeyboard = new LatinKeyboard(this, R.xml.azerty_fr);
+        mAzertyFrLeftKeyboard = new LatinKeyboard(this, R.xml.azerty_fr_left);
         mQwertyGrKeyboard = new LatinKeyboard(this, R.xml.qwerty_gr);
+        mQwertyGrLeftKeyboard = new LatinKeyboard(this, R.xml.qwerty_gr_left);
         mQwertyItKeyboard = new LatinKeyboard(this, R.xml.qwerty_it);
+        mQwertyItLeftKeyboard = new LatinKeyboard(this, R.xml.qwerty_it_left);
         mQwertyPtKeyboard = new LatinKeyboard(this, R.xml.qwerty_pt);
+        mQwertyPtLeftKeyboard = new LatinKeyboard(this, R.xml.qwerty_pt_left);
         mQwertyTrKeyboard = new LatinKeyboard(this, R.xml.qwerty_tr);
+        mQwertyTrLeftKeyboard = new LatinKeyboard(this, R.xml.qwerty_tr_left);
         mEastSlavicKeyboard = new LatinKeyboard(this, R.xml.east_slavic);
+        mEastSlavicLeftKeyboard = new LatinKeyboard(this, R.xml.east_slavic_left);
         mArabicKeyboard = new LatinKeyboard(this, R.xml.arabic);
+        mArabicLeftKeyboard = new LatinKeyboard(this, R.xml.arabic_left);
         mSymbolsKeyboard = new LatinKeyboard(this, R.xml.symbols);
+        mSymbolsLeftKeyboard = new LatinKeyboard(this, R.xml.symbols_left);
         mSymbolsShiftedKeyboard = new LatinKeyboard(this, R.xml.symbols_shift);
+        mSymbolsShiftedLeftKeyboard = new LatinKeyboard(this, R.xml.symbols_shift_left);
         mPhoneKeyboard = new LatinKeyboard(this, R.xml.phone);
+        mPhoneLeftKeyboard = new LatinKeyboard(this, R.xml.phone_left);
+    }
+
+    private LatinKeyboard getQwertyKeyboard() {
+        return isRightHanded() ? mQwertyKeyboard : mQwertyLeftKeyboard;
+    }
+
+    private LatinKeyboard getGreekKeyboard() {
+        return isRightHanded() ? mQwertyGrKeyboard : mQwertyGrLeftKeyboard;
+    }
+
+    private LatinKeyboard getGermanKeyboard() {
+        return isRightHanded() ? mQwertzDeKeyboard: mQwertzDeLeftKeyboard;
+    }
+
+    private LatinKeyboard getSpanishKeyboard() {
+        return isRightHanded() ? mQwertyEsKeyboard: mQwertyEsLeftKeyboard;
+    }
+
+    private LatinKeyboard getFrenchKeyboard() {
+        return isRightHanded() ? mAzertyFrKeyboard : mAzertyFrLeftKeyboard;
+    }
+
+    private LatinKeyboard getItalianKeyboard() {
+        return isRightHanded() ? mQwertyItKeyboard : mQwertyItLeftKeyboard;
+    }
+
+    private LatinKeyboard getPortogueseKeyboard() {
+        return isRightHanded() ? mQwertyPtKeyboard : mQwertyPtLeftKeyboard;
+    }
+
+    private LatinKeyboard getTurkishKeyboard() {
+        return isRightHanded() ? mQwertyTrKeyboard : mQwertyTrLeftKeyboard;
+    }
+
+    private LatinKeyboard getRussiancKeyboard() {
+        return isRightHanded() ? mEastSlavicKeyboard : mEastSlavicLeftKeyboard;
+    }
+
+    private LatinKeyboard getArabicKeyboard() {
+        return isRightHanded() ? mArabicKeyboard : mArabicLeftKeyboard;
     }
 
     /**
@@ -174,7 +240,7 @@ public class SoftKeyboard extends InputMethodService implements
             case InputType.TYPE_CLASS_PHONE:
                 // Phones will also default to the symbols keyboard, though
                 // often you will want to have a dedicated phone keyboard.
-                mCurKeyboard = mPhoneKeyboard;
+                mCurKeyboard = getPhoneKeyboard();
                 break;
 
             case InputType.TYPE_CLASS_TEXT:
@@ -256,27 +322,27 @@ public class SoftKeyboard extends InputMethodService implements
         // TO-DO: Replace getLocale (depreciated in API 24) with getLanguageTag
         switch (subtype.getLocale()) {
             case "en_US":
-                return mQwertyKeyboard;
+                return getQwertyKeyboard();
             case "de_DE":
-                return mQwertzDeKeyboard;
+                return getGermanKeyboard();
             case "es_ES":
-                return mQwertyEsKeyboard;
+                return getSpanishKeyboard();
             case "fr_FR":
-                return mAzertyFrKeyboard;
+                return getFrenchKeyboard();
             case "el_GR":
-                return mQwertyGrKeyboard;
+                return getGreekKeyboard();
             case "it_IT":
-                return mQwertyItKeyboard;
+                return getItalianKeyboard();
             case "pt_PT":
-                return mQwertyPtKeyboard;
+                return getPortogueseKeyboard();
             case "tr_TR":
-                return mQwertyTrKeyboard;
+                return getTurkishKeyboard();
             case "ar_001":
-                return mArabicKeyboard;
+                return getArabicKeyboard();
             case "ru_RU":
-                return mEastSlavicKeyboard;
+                return getRussiancKeyboard();
             default:
-                return mQwertyKeyboard;
+                return getQwertyKeyboard();
         }
     }
 
@@ -305,17 +371,44 @@ public class SoftKeyboard extends InputMethodService implements
             performEditorAction(mCurrentEditorInfo);
         } else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE
                 && mInputView != null) {
-            Keyboard current = mInputView.getKeyboard();
-            if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) {
+            if (isAnySymbolsKeyboard(mInputView.getKeyboard())) {
                 InputMethodSubtype subtype = mInputMethodManager.getCurrentInputMethodSubtype();
                 setLatinKeyboard(getKeyboard(subtype));
             } else {
-                setLatinKeyboard(mSymbolsKeyboard);
+                setLatinKeyboard(getSymbolsKeyboard());
                 mInputView.setShiftKey(false, false);
             }
         } else {
             handleCharacter(primaryCode);
         }
+    }
+
+    private boolean isAnySymbolsKeyboard(Keyboard keyboard) {
+        return (isSymbolsKeyboard(keyboard) || isSymbolsShiftedKeyboard(keyboard));
+    }
+
+    private boolean isSymbolsKeyboard(Keyboard keyboard) {
+        return (keyboard == mSymbolsKeyboard || keyboard == mSymbolsLeftKeyboard);
+    }
+
+    private boolean isSymbolsShiftedKeyboard(Keyboard keyboard) {
+        return (keyboard == mSymbolsShiftedKeyboard || keyboard == mSymbolsShiftedLeftKeyboard);
+    }
+
+    private LatinKeyboard getSymbolsKeyboard() {
+        return isRightHanded() ? mSymbolsKeyboard : mSymbolsLeftKeyboard;
+    }
+
+    private LatinKeyboard getSymbolsShiftedKeyboard() {
+        return isRightHanded() ? mSymbolsShiftedKeyboard : mSymbolsShiftedLeftKeyboard;
+    }
+
+    private LatinKeyboard getPhoneKeyboard() {
+        return isRightHanded() ? mPhoneKeyboard : mPhoneLeftKeyboard;
+    }
+
+    private boolean isRightHanded() {
+        return mUserProfileContainer.isRightHanded();
     }
 
     private void performEditorAction(EditorInfo sEditorInfo) {
@@ -377,13 +470,13 @@ public class SoftKeyboard extends InputMethodService implements
         if (isQwertyKeyboard(currentKeyboard)) {
             // Alphabet keyboard
             mInputView.setShiftKey(!mInputView.isShifted(), true);
-        } else if (currentKeyboard == mSymbolsKeyboard) {
+        } else if (isSymbolsKeyboard(currentKeyboard)) {
             mInputView.setShiftKey(true, false);
-            setLatinKeyboard(mSymbolsShiftedKeyboard);
+            setLatinKeyboard(getSymbolsShiftedKeyboard());
             mInputView.setShiftKey(true, false);
-        } else if (currentKeyboard == mSymbolsShiftedKeyboard) {
+        } else if (isSymbolsShiftedKeyboard(currentKeyboard)) {
             mInputView.setShiftKey(false, false);
-            setLatinKeyboard(mSymbolsKeyboard);
+            setLatinKeyboard(getSymbolsKeyboard());
             mInputView.setShiftKey(false, false);
         }
     }
@@ -425,7 +518,7 @@ public class SoftKeyboard extends InputMethodService implements
     }
 
     private boolean isQwertyKeyboard(Keyboard keyboard) {
-        return mSymbolsKeyboard != keyboard && mSymbolsShiftedKeyboard != keyboard;
+        return !isAnySymbolsKeyboard(keyboard);
     }
 
     private boolean setNextCharToCapital() {
