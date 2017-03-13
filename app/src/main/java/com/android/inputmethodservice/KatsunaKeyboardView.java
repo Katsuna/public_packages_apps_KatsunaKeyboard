@@ -63,6 +63,7 @@ import com.katsuna.keyboard.ui.interfaces.ProfileInfoProvider;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -551,7 +552,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
     private CharSequence adjustCase(CharSequence label) {
         if (mKeyboard.isShifted() && label != null && label.length() < 3
                 && Character.isLowerCase(label.charAt(0))) {
-            label = label.toString().toUpperCase();
+            label = label.toString().toUpperCase(new Locale("en_US"));
         }
         return label;
     }
