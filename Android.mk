@@ -17,6 +17,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := android-support-v4
 LOCAL_STATIC_JAVA_LIBRARIES += android-support-v7-appcompat
 LOCAL_STATIC_JAVA_LIBRARIES += android-support-design
 
+LOCAL_STATIC_JAVA_AAR_LIBRARIES := roundedimageview
+
 # Include KatsunaCommon into this app
 LOCAL_REQUIRED_MODULES := KatsunaCommon
 LOCAL_STATIC_JAVA_LIBRARIES += KatsunaCommon
@@ -29,6 +31,7 @@ LOCAL_AAPT_FLAGS += --generate-dependencies
 LOCAL_AAPT_FLAGS += --extra-packages com.katsuna.commons
 LOCAL_AAPT_FLAGS += --extra-packages android.support.v7.appcompat
 LOCAL_AAPT_FLAGS += --extra-packages android.support.design
+LOCAL_AAPT_FLAGS += --extra-packages com.makeramen.roundedimageview
 
 LOCAL_PACKAGE_NAME := KatsunaKeyboard
 LOCAL_CERTIFICATE := platform
