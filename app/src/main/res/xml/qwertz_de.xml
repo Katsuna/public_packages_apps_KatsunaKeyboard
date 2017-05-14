@@ -2,7 +2,7 @@
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:horizontalGap="@dimen/horizontalGap"
     android:keyHeight="@dimen/key_height"
-    android:keyWidth="10%p"
+    android:keyWidth="9%p"
     android:verticalGap="@dimen/verticalGap">
 
     <Row>
@@ -90,7 +90,7 @@
             android:keyLabel="ä" />
     </Row>
 
-    <Row>
+    <Row android:keyWidth="10%p">
         <Key
             android:codes="@integer/key_shift"
             android:isModifier="true"
