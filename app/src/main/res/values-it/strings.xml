@@ -18,9 +18,6 @@
   <string name="label_subtype_ru">Russo</string>
   <string name="label_subtype_es">Spagnolo</string>
   <string name="label_subtype_tr">Turco</string>
-  <string name="textField">Campo di testo</string>
-  <string name="phoneField">Campo telefono</string>
-  <string name="passwordField">Campo password</string>
   <string name="close_popup_keyboard">Chiudi popup tastiera</string>
   <string name="switch_1">"&amp;\\;"</string>
   <string name="switch_2">"+=("</string>

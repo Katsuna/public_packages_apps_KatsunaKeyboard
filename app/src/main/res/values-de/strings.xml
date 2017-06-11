@@ -17,11 +17,7 @@
   <string name="label_subtype_pt">Portugiesisch</string>
   <string name="label_subtype_ru">Russisch</string>
   <string name="label_subtype_es">Spanisch</string>
-  <string name="label_subtype_tr">Türkisch
-</string>
-  <string name="textField">Textfeld</string>
-  <string name="phoneField">Telefon-Feld</string>
-  <string name="passwordField">Passwort-Feld </string>
+  <string name="label_subtype_tr">Türkisch</string>
   <string name="close_popup_keyboard">Tastatur- Popup abschalten</string>
   <string name="switch_1">"&amp; \ \;"</string>
   <string name="switch_2">"+=("</string>

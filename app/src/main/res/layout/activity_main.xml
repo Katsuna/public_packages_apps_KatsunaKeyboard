@@ -13,7 +13,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/textField"
             android:inputType="textMultiLine" />
     </android.support.design.widget.TextInputLayout>
 
@@ -25,7 +24,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/phoneField"
             android:inputType="phone"
             android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
@@ -38,7 +36,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/passwordField"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:maxLines="1" />
