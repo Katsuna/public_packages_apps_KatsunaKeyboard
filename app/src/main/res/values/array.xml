@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="hand_of_use">
+        <item>@string/common_profile_auto</item>
+        <item>@string/common_hand_right</item>
+        <item>@string/common_hand_left</item>
+    </string-array>
+
+    <string-array name="hand_of_use_values">
+        <item>auto</item>
+        <item>true</item>
+        <item>false</item>
+    </string-array>
+
+</resources>
