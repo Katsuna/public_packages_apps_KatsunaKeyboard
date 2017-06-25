@@ -1,11 +1,11 @@
 <resources>
     <!-- App name -->
-    <string name="app_name">Katsuna Keyboard</string>
+    <string name="app_name">Keyboard</string>
     <!-- IME label -->
     <string name="simple_ime">Katsuna IME</string>
 
     <!-- Settings title -->
-    <string name="settings_name">Katsuna Keyboard Settings</string>
+    <string name="settings_name">Keyboard Settings</string>
 
     <!-- Labels for input language selection -->
     <string name="language_selection_title">Input languages</string>
