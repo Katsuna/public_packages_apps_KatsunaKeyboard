@@ -53,9 +53,11 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.katsuna.commons.entities.ColorProfile;
 import com.katsuna.commons.entities.ColorProfileKey;
 import com.katsuna.commons.entities.UserProfile;
 import com.katsuna.commons.utils.ColorCalc;
+import com.katsuna.commons.utils.DrawUtils;
 import com.katsuna.keyboard.Constants;
 import com.katsuna.keyboard.R;
 import com.katsuna.keyboard.ui.interfaces.ProfileInfoProvider;
@@ -677,9 +679,11 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
 
             if (label != null) {
                 if (isNumeric(label)) {
+                    paint.setColor(getTextColor());
                     paint.setTextSize(mKeyTextSize);
                     paint.setTypeface(Typeface.DEFAULT_BOLD);
                 } else {
+                    paint.setColor(mKeyTextColor);
                     // For characters, use large font. For labels like "Done", use small font.
                     if (label.length() > 1 && key.codes.length < 2) {
                         paint.setTextSize(mLabelTextSize);
@@ -793,6 +797,9 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
         Drawable arrow = ContextCompat.getDrawable(mContext,
                 R.drawable.ic_keyboard_return_black_24dp);
 
+        int arrowColor = getTextColor();
+        DrawUtils.setColor(arrow, arrowColor);
+
         Drawable[] layers = {circle, arrow};
         LayerDrawable layerDrawable = new LayerDrawable(layers);
 
@@ -846,6 +853,17 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
         UserProfile profile = mProfileInfoProvider.getUserProfile();
         return ColorCalc.getColor(getContext(), ColorProfileKey.ACCENT1_COLOR,
                 profile.colorProfile);
+    }
+
+    private int getTextColor() {
+        int output = mKeyTextColor;
+
+        UserProfile profile = mProfileInfoProvider.getUserProfile();
+        if (profile.colorProfile == ColorProfile.CONTRAST) {
+            output = ContextCompat.getColor(mContext, R.color.common_white);
+        }
+
+        return output;
     }
 
     private void setBackgroundDrawableState(Drawable drawable, Keyboard.Key key) {
