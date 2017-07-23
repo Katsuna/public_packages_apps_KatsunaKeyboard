@@ -791,7 +791,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
     private Drawable getReturnKeyBackground() {
         GradientDrawable circle = (GradientDrawable) ContextCompat.getDrawable(mContext,
                 R.drawable.circle);
-        int accentColor1 = getAccentColor1();
+        int accentColor1 = getColorForReturnKey();
         circle.setColor(accentColor1);
 
         Drawable arrow = ContextCompat.getDrawable(mContext,
@@ -849,10 +849,21 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
         return res;
     }
 
-    private int getAccentColor1() {
+    private int getColorForReturnKey() {
         UserProfile profile = mProfileInfoProvider.getUserProfile();
         return ColorCalc.getColor(getContext(), ColorProfileKey.ACCENT1_COLOR,
                 profile.colorProfile);
+    }
+
+    private int getAccentColor1() {
+        UserProfile profile = mProfileInfoProvider.getUserProfile();
+        if (profile.colorProfile == ColorProfile.CONTRAST) {
+            return ColorCalc.getColor(getContext(), ColorProfileKey.ACCENT2_COLOR,
+                    profile.colorProfile);
+        } else {
+            return ColorCalc.getColor(getContext(), ColorProfileKey.ACCENT1_COLOR,
+                    profile.colorProfile);
+        }
     }
 
     private int getArrowColor() {
