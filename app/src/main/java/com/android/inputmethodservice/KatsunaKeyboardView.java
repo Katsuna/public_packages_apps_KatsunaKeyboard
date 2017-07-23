@@ -797,7 +797,7 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
         Drawable arrow = ContextCompat.getDrawable(mContext,
                 R.drawable.ic_keyboard_return_black_24dp);
 
-        int arrowColor = getTextColor();
+        int arrowColor = getArrowColor();
         DrawUtils.setColor(arrow, arrowColor);
 
         Drawable[] layers = {circle, arrow};
@@ -855,12 +855,24 @@ public class KatsunaKeyboardView extends View implements View.OnClickListener {
                 profile.colorProfile);
     }
 
-    private int getTextColor() {
+    private int getArrowColor() {
         int output = mKeyTextColor;
 
         UserProfile profile = mProfileInfoProvider.getUserProfile();
         if (profile.colorProfile == ColorProfile.CONTRAST) {
             output = ContextCompat.getColor(mContext, R.color.common_white);
+        }
+
+        return output;
+    }
+
+
+    private int getTextColor() {
+        int output = mKeyTextColor;
+
+        UserProfile profile = mProfileInfoProvider.getUserProfile();
+        if (profile.colorProfile == ColorProfile.CONTRAST) {
+            output = ContextCompat.getColor(mContext, R.color.common_grey900);
         }
 
         return output;
