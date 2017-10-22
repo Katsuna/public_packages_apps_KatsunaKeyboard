@@ -25,7 +25,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.katsuna.keyboard.ui.MainActivity" />
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:label="@string/katsuna_keyboard_setup"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.activities.InfoActivity"
+            android:label="@string/common_app_info"
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.katsuna.keyboard.ui.ImePreferences"
