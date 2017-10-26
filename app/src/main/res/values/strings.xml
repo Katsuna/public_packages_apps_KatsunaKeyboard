@@ -64,7 +64,6 @@
     <string name="keyboard_password_character_no_headset">Dot.</string>
 
     <!-- Keyboard setup strings -->
-    <string name="katsuna_keyboard_setup">Katsuna Keyboard setup</string>
     <string name="step_1">1st Step</string>
     <string name="enable_keyboard_button">Enable Keyboard</string>
     <string name="enable_keyboard_label">Enable Katsuna keyboard</string>
