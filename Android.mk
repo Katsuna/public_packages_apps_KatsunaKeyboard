@@ -26,8 +26,8 @@ LOCAL_STATIC_JAVA_LIBRARIES += KatsunaCommon
 LOCAL_RESOURCE_DIR += frameworks/KatsunaCommon/commons/src/main/res
 
 LOCAL_AAPT_INCLUDE_ALL_RESOURCES := true
-LOCAL_AAPT_FLAGS := --version-code 3
-LOCAL_AAPT_FLAGS += --version-name "1.2.0"
+LOCAL_AAPT_FLAGS := --version-code 4
+LOCAL_AAPT_FLAGS += --version-name "1.2.1"
 LOCAL_AAPT_FLAGS += --auto-add-overlay
 LOCAL_AAPT_FLAGS += --generate-dependencies
 LOCAL_AAPT_FLAGS += --extra-packages com.katsuna.commons
