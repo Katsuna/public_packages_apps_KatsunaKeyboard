@@ -65,12 +65,12 @@
 
     <!-- Keyboard setup strings -->
     <string name="step_1">1st Step</string>
-    <string name="enable_keyboard_button">Enable Keyboard</string>
+    <string name="enable_keyboard_button">Enable</string>
     <string name="enable_keyboard_label">Enable Katsuna keyboard</string>
     <string name="enable_keyboard_desc">By enabling Katsuna keyboard you can add it to your list of keyboards and use it.</string>
 
     <string name="step_2">2nd Step</string>
-    <string name="set_keyboard_button">Set Keyboard</string>
+    <string name="set_keyboard_button">Set</string>
     <string name="set_keyboard_label">Set Katsuna keyboard</string>
     <string name="set_keyboard_desc">Select and set Katsuna keyboard as your input method. Conveniently type messages and add information.</string>
     <!-- Eof keyboard setup strings -->
