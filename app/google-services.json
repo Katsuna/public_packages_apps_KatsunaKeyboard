@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "904494894319",
+    "firebase_url": "https://katsuna-keyboard.firebaseio.com",
+    "project_id": "katsuna-keyboard",
+    "storage_bucket": "katsuna-keyboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904494894319:android:a298475176009048",
+        "android_client_info": {
+          "package_name": "com.katsuna.keyboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904494894319-ekqrh4ch4vb5hrseetkum6l0sbmkpbq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.katsuna.keyboard",
+            "certificate_hash": "a4b16c796eb20f609379f32a8ae7a9b74a7f9947"
+          }
+        },
+        {
+          "client_id": "904494894319-7qavds3ok3lg204nkr3g4j72qsi7fq5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABbgJ6N-sncnPlgJB_BimHeuoJdlNeCCA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904494894319-7qavds3ok3lg204nkr3g4j72qsi7fq5m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
