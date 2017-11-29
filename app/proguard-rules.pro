@@ -33,3 +33,4 @@
 # Keep all libraries
 -keep class android.support.** { *; }
 -keep class org.joda.** { *; }
+-keep class com.google.** { *; }
