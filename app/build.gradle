@@ -8,13 +8,13 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.3"
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
         applicationId "com.katsuna.keyboard"
-        minSdkVersion 23
-        targetSdkVersion 25
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 5
         versionName "1.3.0"
         project.ext.set("archivesBaseName", "Keyboard-" + defaultConfig.versionName);
@@ -48,8 +48,8 @@ dependencies {
     compile 'com.google.firebase:firebase-perf:11.0.4'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:design:25.2.0'
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
     compile 'joda-time:joda-time:2.8.2'
     compile project(":commons")
 }
