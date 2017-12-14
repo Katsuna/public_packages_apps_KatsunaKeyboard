@@ -53,13 +53,11 @@
   <string name="keyboard_password_character_no_headset">Punkt.</string>
   <!-- Keyboard setup strings -->
   <string name="step_1">1. Schritt</string>
-  <string name="enable_keyboard_button">Tastatur aktivieren
-</string>
+  <string name="enable_keyboard_button">Enable</string>
   <string name="enable_keyboard_label">Katsuna-Tastatur aktivieren</string>
   <string name="enable_keyboard_desc">Wenn Sie die Katsuna-Tastatur aktivieren, können Sie sie zu Ihrer Tastaturliste hinzufügen und verwenden.</string>
   <string name="step_2">2. Schritt</string>
-  <string name="set_keyboard_button">Tastatur festlegen
-</string>
+  <string name="set_keyboard_button">Set</string>
   <string name="set_keyboard_label">Katsuna-Tastatur festlegen</string>
   <string name="set_keyboard_desc">Wählen Sie die Katsuna-Tastatur aus und stellen Sie sie als Eingabemethode ein. Schreiben Sie bequem Nachrichten und fügen Sie Informationen hinzu.</string>
   <!-- Eof keyboard setup strings -->

@@ -51,13 +51,13 @@
   <!-- The value of a keyboard key announced when accessibility is enabled and no headsed is used. [CHAR LIMIT=NONE] -->
   <string name="keyboard_password_character_no_headset">Punto.</string>
   <!-- Keyboard setup strings -->
-  <string name="step_1">1st Step</string>
-  <string name="enable_keyboard_button">Enable Keyboard</string>
-  <string name="enable_keyboard_label">Enable Katsuna keyboard</string>
-  <string name="enable_keyboard_desc">By enabling Katsuna keyboard you can add it to your list of keyboards and use it.</string>
-  <string name="step_2">2nd Step</string>
-  <string name="set_keyboard_button">Set Keyboard</string>
-  <string name="set_keyboard_label">Set Katsuna keyboard</string>
-  <string name="set_keyboard_desc">Select and set Katsuna keyboard as your input method. Conveniently type messages and add information.</string>
+  <string name="step_1">1er paso</string>
+  <string name="enable_keyboard_button">Enable</string>
+  <string name="enable_keyboard_label">Activar teclado Katsuna</string>
+  <string name="enable_keyboard_desc">Tras habilitar el teclado Katsuna puedes agregarlo a tu lista de teclados y utilizarlo.</string>
+  <string name="step_2">2 º paso</string>
+  <string name="set_keyboard_button">Set</string>
+  <string name="set_keyboard_label">Activar teclado Katsuna</string>
+  <string name="set_keyboard_desc">Selecciona y activa el teclado Katsuna como su método de entrada. Podras escribir mensajes y añadir información convenientemente.</string>
   <!-- Eof keyboard setup strings -->
 </resources>

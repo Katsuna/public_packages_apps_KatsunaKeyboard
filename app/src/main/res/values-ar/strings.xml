@@ -52,11 +52,11 @@
   <string name="keyboard_password_character_no_headset">نقطة.</string>
   <!-- Keyboard setup strings -->
   <string name="step_1">الخطوة الأولى</string>
-  <string name="enable_keyboard_button">تشغيل لوحة المفاتيح</string>
+  <string name="enable_keyboard_button">Enable</string>
   <string name="enable_keyboard_label">تشغيل لوحة مفاتيح كاتسونا</string>
   <string name="enable_keyboard_desc">بتشغيل لوحة مفاتيح كاتسونا يمكنك إضافتها إلى لوحات المفاتيح المتوفرة واستخدامها.</string>
   <string name="step_2">الخطوة الثانية</string>
-  <string name="set_keyboard_button">اختيار لوحة المفاتيح</string>
+  <string name="set_keyboard_button">Set</string>
   <string name="set_keyboard_label">اختيار لوحة مفاتيح كاتسونا</string>
   <string name="set_keyboard_desc">قم باختيار لوحة مفاتيح كاتسونا كأسلوب الإدخال الخاص بك لسهولة كتابة الرسائل وإضافة المعلومات.</string>
   <!-- Eof keyboard setup strings -->
