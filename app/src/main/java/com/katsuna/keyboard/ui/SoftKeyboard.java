@@ -207,7 +207,9 @@ public class SoftKeyboard extends InputMethodService implements
             // always show keyboard switch key
             nextKeyboard.setLanguageSwitchKeyVisibility(true);
         }
-        mInputView.setKeyboard(nextKeyboard);
+        if (mInputView != null) {
+            mInputView.setKeyboard(nextKeyboard);
+        }
     }
 
     /**
