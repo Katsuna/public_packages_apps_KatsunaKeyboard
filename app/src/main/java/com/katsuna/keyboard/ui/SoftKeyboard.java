@@ -206,6 +206,9 @@ public class SoftKeyboard extends InputMethodService implements
         if (isQwertyKeyboard(nextKeyboard)) {
             // always show keyboard switch key
             nextKeyboard.setLanguageSwitchKeyVisibility(true);
+            boolean shouldSupportLanguageSwitchKey = mInputMethodManager
+                    .shouldOfferSwitchingToNextInputMethod(getToken());
+            nextKeyboard.setLanguageSwitchKeyVisibility(shouldSupportLanguageSwitchKey);
         }
         if (mInputView != null) {
             mInputView.setKeyboard(nextKeyboard);

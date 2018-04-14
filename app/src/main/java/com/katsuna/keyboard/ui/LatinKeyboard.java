@@ -35,6 +35,8 @@ class LatinKeyboard extends Keyboard {
     private Key mSavedLanguageSwitchKey;
 
     private Key mShiftKey;
+    private Key mSpaceKey;
+    private Key mSavedSpaceKey;
 
     public LatinKeyboard(Context context, int xmlLayoutResId) {
         super(context, xmlLayoutResId);
@@ -52,6 +54,9 @@ class LatinKeyboard extends Keyboard {
             mSavedLanguageSwitchKey = new Key(res, parent, x, y, parser);
         } else if (key.codes[0] == Keyboard.KEYCODE_SHIFT) {
             mShiftKey = key;
+        } else if (key.codes[0] == 32) {
+            mSpaceKey = key;
+            mSavedSpaceKey = new Key(res, parent, x, y, parser);
         }
         return key;
     }
@@ -65,9 +70,9 @@ class LatinKeyboard extends Keyboard {
         if (visible) {
             // The language switch key should be visible. Restore the size of the mode change key
             // and language switch key using the saved layout.
-            if (mModeChangeKey != null) {
-                mModeChangeKey.width = mSavedModeChangeKey.width;
-                mModeChangeKey.x = mSavedModeChangeKey.x;
+            if (mSpaceKey != null) {
+                mSpaceKey.width = mSavedSpaceKey.width;
+                mSpaceKey.x = mSavedSpaceKey.x;
             }
 
             if (mLanguageSwitchKey != null) {
@@ -78,8 +83,9 @@ class LatinKeyboard extends Keyboard {
         } else {
             // The language switch key should be hidden. Change the width of the mode change key
             // to fill the space of the language key so that the user will not see any strange gap.
-            if (mModeChangeKey != null) {
-                mModeChangeKey.width = mSavedModeChangeKey.width + mSavedLanguageSwitchKey.width;
+            if (mSpaceKey != null) {
+                mSpaceKey.width = mSavedSpaceKey.width + mSavedLanguageSwitchKey.width;
+                mSpaceKey.x = mSavedSpaceKey.x - mSavedLanguageSwitchKey.width;
             }
 
             if (mLanguageSwitchKey != null) {
