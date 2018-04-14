@@ -2,14 +2,9 @@ package com.katsuna.keyboard.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
 
 import com.android.inputmethodcommon.InputMethodSettingsFragment;
-import com.katsuna.commons.entities.PreferenceKey;
-import com.katsuna.commons.entities.UserProfileContainer;
-import com.katsuna.commons.utils.ProfileReader;
 import com.katsuna.keyboard.R;
 
 public class ImePreferences extends PreferenceActivity {
