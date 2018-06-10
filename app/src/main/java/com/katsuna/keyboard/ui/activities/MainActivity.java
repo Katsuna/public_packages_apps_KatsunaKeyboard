@@ -26,6 +26,7 @@ import com.katsuna.commons.utils.SizeAdjuster;
 import com.katsuna.keyboard.R;
 
 import static com.katsuna.commons.utils.Constants.KATSUNA_PRIVACY_URL;
+import static com.katsuna.commons.utils.Constants.KATSUNA_TERMS_OF_USE;
 
 public class MainActivity extends KatsunaActivity {
 
@@ -132,6 +133,11 @@ public class MainActivity extends KatsunaActivity {
                     case R.id.drawer_privacy:
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(KATSUNA_PRIVACY_URL));
                         startActivity(browserIntent);
+                        break;
+                    case R.id.drawer_terms:
+                        Intent termsIntent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(KATSUNA_TERMS_OF_USE));
+                        startActivity(termsIntent);
                         break;
                 }
 
