@@ -1,6 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.firebase.firebase-perf'
-
 
 // Load keystore
 def keystorePropertiesFile = rootProject.file("../../../vendor/keys/keystore.properties")
@@ -45,7 +43,6 @@ android {
 dependencies {
     implementation 'com.google.firebase:firebase-crash:11.0.4'
     implementation 'com.google.firebase:firebase-core:11.0.4'
-    implementation 'com.google.firebase:firebase-perf:11.0.4'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
