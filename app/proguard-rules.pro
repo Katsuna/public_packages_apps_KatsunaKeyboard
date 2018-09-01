@@ -34,3 +34,7 @@
 -keep class android.support.** { *; }
 -keep class org.joda.** { *; }
 -keep class com.google.** { *; }
+
+# keep crashlytics
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
