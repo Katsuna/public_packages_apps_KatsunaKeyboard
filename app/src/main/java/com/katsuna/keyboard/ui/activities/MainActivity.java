@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.katsuna.commons.controls.KatsunaNavigationView;
 import com.katsuna.commons.entities.UserProfile;
 import com.katsuna.commons.ui.KatsunaActivity;
 import com.katsuna.commons.utils.ColorAdjuster;
@@ -118,7 +119,7 @@ public class MainActivity extends KatsunaActivity {
     }
 
     private void setupDrawerLayout() {
-        NavigationView view = (NavigationView) findViewById(R.id.nav_view);
+        KatsunaNavigationView view = findViewById(R.id.katsuna_navigation_view);
         assert view != null;
         view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -142,6 +143,12 @@ public class MainActivity extends KatsunaActivity {
                 }
 
                 return true;
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.closeDrawers();
             }
         });
     }
