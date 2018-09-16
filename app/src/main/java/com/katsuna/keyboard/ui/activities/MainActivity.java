@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.katsuna.commons.controls.KatsunaNavigationView;
 import com.katsuna.commons.entities.UserProfile;
 import com.katsuna.commons.ui.KatsunaActivity;
+import com.katsuna.commons.utils.BrowserUtils;
 import com.katsuna.commons.utils.ColorAdjuster;
 import com.katsuna.commons.utils.SizeAdjuster;
 import com.katsuna.keyboard.R;
@@ -132,13 +133,10 @@ public class MainActivity extends KatsunaActivity {
                         startActivity(new Intent(MainActivity.this, InfoActivity.class));
                         break;
                     case R.id.drawer_privacy:
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(KATSUNA_PRIVACY_URL));
-                        startActivity(browserIntent);
+                        BrowserUtils.openUrl(MainActivity.this, KATSUNA_PRIVACY_URL);
                         break;
                     case R.id.drawer_terms:
-                        Intent termsIntent = new Intent(Intent.ACTION_VIEW,
-                                Uri.parse(KATSUNA_TERMS_OF_USE));
-                        startActivity(termsIntent);
+                        BrowserUtils.openUrl(MainActivity.this, KATSUNA_TERMS_OF_USE);
                         break;
                 }
 
