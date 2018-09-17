@@ -87,7 +87,12 @@ class LatinKeyboard extends Keyboard {
                 int mSavedLanguageSwitchKeyWidth = mSavedLanguageSwitchKey == null ? 0 :
                         mSavedLanguageSwitchKey.width;
                 mSpaceKey.width = mSavedSpaceKey.width + mSavedLanguageSwitchKeyWidth;
-                mSpaceKey.x = mSavedSpaceKey.x - mSavedLanguageSwitchKeyWidth;
+                // check if switch language key is before space key
+                if (mLanguageSwitchKey.x < mSpaceKey.x) {
+                    mSpaceKey.x = mSavedSpaceKey.x - mSavedLanguageSwitchKeyWidth;
+                } else {
+                    mSpaceKey.x = mSavedSpaceKey.x;
+                }
             }
 
             if (mLanguageSwitchKey != null) {
