@@ -14,8 +14,8 @@ android {
         applicationId "com.katsuna.keyboard"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 7
-        versionName "1.4.1"
+        versionCode 8
+        versionName "1.4.2"
         project.ext.set("archivesBaseName", "Keyboard-" + defaultConfig.versionName)
     }
 
