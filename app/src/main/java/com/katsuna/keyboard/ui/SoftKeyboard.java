@@ -323,6 +323,9 @@ public class SoftKeyboard extends InputMethodService implements
     }
 
     private LatinKeyboard getKeyboard(InputMethodSubtype subtype) {
+        // null subtype handling
+        if (subtype == null) return getQwertyKeyboard();
+
         // Transform if statement to switch, in order to support multiple languages in the future
         // TO-DO: Replace getLocale (depreciated in API 24) with getLanguageTag
         switch (subtype.getLocale()) {
