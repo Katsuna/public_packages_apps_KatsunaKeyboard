@@ -37,7 +37,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
-                        android:src="@mipmap/common_keyboard_icon" />
+                        android:src="@mipmap/ic_keyboard_launcher" />
 
                     <TextView
                         android:id="@+id/app_name"
