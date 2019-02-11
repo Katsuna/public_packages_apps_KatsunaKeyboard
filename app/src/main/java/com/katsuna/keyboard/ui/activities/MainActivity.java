@@ -1,5 +1,7 @@
 package com.katsuna.keyboard.ui.activities;
 
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -81,7 +83,18 @@ public class MainActivity extends KatsunaActivity {
         mEnableKeyboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS), 0);
+                try {
+                    startActivityForResult(new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS), 0);
+                } catch (ActivityNotFoundException ex) {
+                    Log.w(TAG, "No activity found to open ACTION_INPUT_METHOD_SETTINGS. " +
+                        "Plan b initiated");
+
+                    try {
+                        openInputMethodSettingsPlanB();
+                    } catch (ActivityNotFoundException ex2) {
+                        Log.w(TAG, "Plan b initiated failed. " + ex2.getMessage());
+                    }
+                }
             }
         });
 
@@ -105,6 +118,17 @@ public class MainActivity extends KatsunaActivity {
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, e.getMessage());
         }
+    }
+
+    private void openInputMethodSettingsPlanB() {
+        // credits go to
+        // https://stackoverflow.com/q/2192419
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_MAIN);
+        ComponentName com = new ComponentName("com.android.settings",
+            "com.android.settings.LanguageSettings");
+        intent.setComponent(com);
+        startActivity(intent);
     }
 
     private void initDrawer() {
